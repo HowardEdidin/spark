@@ -7,17 +7,17 @@
     </div>
   </text>
 
-  <name value="Spark FHIR demo server" />
+  <name value="Spark FHIR HealthConnex Experimental" />
 
-  <publisher value="Furore"/>
+  <publisher value="HealthConnex"/>
 
   <telecom>
     <system value="email"/>
-    <value value="e.kramer@furore.com"/>
+    <value value="bpostlethwaite@healthconnex.com.au"/>
     <use value="work"/>
   </telecom>
 
-  <description value="Conformance statement for the Spark FHIR demo server running at AppHarbor" />
+  <description value="Conformance statement for the Spark FHIR experimental development server" />
 
   <!-- publication date of the conformance statement, is automatically updated at install (/initialize) -->
   <date value="2000-01-01" />
@@ -28,8 +28,8 @@
   </software>
 
   <implementation>
-    <description value="Furore Spark FHIR demo server running at AppHarbor"/>
-    <url value="http://spark.furore.com"/>
+    <description value="HealthConnex Spark FHIR experimental server running on the TelstraHealth ehaas"/>
+    <url value="http://www.healthconnex.com.au"/>
   </implementation>
 
   <!-- Version of FHIR supported by this endpoint -->
@@ -50,9 +50,9 @@
     <!-- this <resource> element is cleared and subsequently auto-generated -->
     <resource>
       <type value="Patient"/>
-      <operation>
+      <!--<operation>
         <code value="read"/>
-      </operation>
+      </operation>-->
     </resource>
 
   </rest>

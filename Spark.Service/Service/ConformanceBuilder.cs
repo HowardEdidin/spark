@@ -22,14 +22,14 @@ namespace Spark.Service
     {
         public const string CONFORMANCE_ID = "self";
         public static readonly string CONFORMANCE_COLLECTION_NAME = typeof(Conformance).GetCollectionName();
-    
+
         public static Conformance Build()
         {
             Stream s = typeof(ConformanceBuilder).Assembly.GetManifestResourceStream("Spark.Service.Service.Conformance.xml");
             StreamReader sr = new StreamReader(s);
             string conformanceXml = sr.ReadToEnd();
 
-            
+
             var conformance = (Conformance)FhirParser.ParseResourceFromXml(conformanceXml);
 
             conformance.Software.Version = ReadVersionFromAssembly();
@@ -43,34 +43,34 @@ namespace Spark.Service
             serverComponent.Resource = new List<Conformance.ConformanceRestResourceComponent>();
 
             // todo: An alternative is needed for the missing operation types below:
-            var allOperations = new List<Conformance.ConformanceRestResourceOperationComponent>()
-            {   new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.Create },
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.Delete },
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.HistoryInstance },
+            var allOperations = new List<Conformance.ResourceInteractionComponent>()
+            {   new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.Create },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.Delete },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.HistoryInstance },
                 /*
                 new Conformance.ConformanceRestResourceOperationComponent { Code =
                     Conformance.RestfulOperationType.HistorySystem },
                 */
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.HistoryType },
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.Read },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.HistoryType },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.Read },
                 
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.SearchType },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.SearchType },
                 /*
                     new Conformance.ConformanceRestResourceOperationComponent { Code =
                     Conformance.RestfulOperationType.Transaction },
                 */
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.Update },
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.Validate },            
-                new Conformance.ConformanceRestResourceOperationComponent { Code =
-                    Conformance.RestfulOperationType.Vread },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.Update },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.Validate },
+                new Conformance.ResourceInteractionComponent { Code =
+                    Conformance.TypeRestfulInteraction.Vread },
             };
 
             foreach (var resourceName in ModelInfo.SupportedResources)
@@ -78,7 +78,7 @@ namespace Spark.Service
                 var supportedResource = new Conformance.ConformanceRestResourceComponent();
                 supportedResource.Type = resourceName;
                 supportedResource.ReadHistory = true;
-                supportedResource.Operation = allOperations;
+                supportedResource.Interaction = allOperations;
 
                 // Add supported _includes for this resource
                 supportedResource.SearchInclude = ModelInfo.SearchParameters
@@ -91,14 +91,16 @@ namespace Spark.Service
                 // todo: search params. error: "The name "Search" does not exist in the current context
                 var parameters = ModelInfo.SearchParameters.Where(sp => sp.Resource == resourceName)
                         .Select(sp => new Conformance.ConformanceRestResourceSearchParamComponent
-                            {
-                                Name = sp.Name,
-                                Type = sp.Type,
-                                Documentation = sp.Description,
-                            });
+                        {
+                            Name = sp.Name,
+                            Definition = new Uri("http://hl7.org/fhir/" + resourceName.ToLower() + "/search#" + sp.Name).OriginalString,
+                            Type = sp.Type,
+                            Documentation = sp.Description,
+                            Chain = sp.Path // != null ? String.Join(",", sp.Path) : null
+                        });
 
                 supportedResource.SearchParam.AddRange(parameters);
-                
+
                 serverComponent.Resource.Add(supportedResource);
             }
 
@@ -107,7 +109,7 @@ namespace Spark.Service
             // Update: new location: XHtml.XHTMLNS / XHtml
             // XNamespace ns = Hl7.Fhir.Support.Util.XHTMLNS;
             XNamespace ns = "http://www.w3.org/1999/xhtml";
-           
+
             var summary = new XElement(ns + "div");
 
             foreach (string resourceName in ModelInfo.SupportedResources)
@@ -138,5 +140,5 @@ namespace Spark.Service
             return attribute.Product;
         }
     }
- 
+
 }

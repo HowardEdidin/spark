@@ -174,7 +174,7 @@ namespace Spark.Service
 
         private void moveIdToRelated(BundleEntry entry)
         {
-            entry.Links.Related = entry.Id;
+            entry.Links.Alternate = entry.Id;
         }
 
         /// <summary>
@@ -306,7 +306,15 @@ namespace Spark.Service
                             rr.Url = fixUri(rr.Url);
                     }
                     if (elem is FhirUri)
-                        ((FhirUri)elem).Value = fixUri(((FhirUri)elem).Value);
+                    {
+                        try
+                        {
+                            ((FhirUri)elem).Value = fixUri(new Uri(((FhirUri)elem).Value, UriKind.RelativeOrAbsolute)).OriginalString;
+                        }
+                        catch (UriFormatException)
+                        {
+                        }
+                    }
                     if (elem is Narrative)
                         ((Narrative)elem).Div = fixXhtmlDiv(((Narrative)elem).Div);
 
