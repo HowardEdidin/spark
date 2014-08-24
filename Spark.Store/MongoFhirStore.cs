@@ -40,7 +40,7 @@ namespace Spark.Store
 
         private const string BSON_ID_MEMBER = "id";
         private const string BSON_RECORDID_MEMBER = "_id";      // SelfLink is re-used as the Mongo key
-       // private const string BSON_CONTENT_MEMBER = "content";
+        // private const string BSON_CONTENT_MEMBER = "content";
 
         private const string BSON_STATE_CURRENT = "current";
         private const string BSON_STATE_SUPERCEDED = "superceded";
@@ -237,7 +237,7 @@ namespace Spark.Store
 
             if (entries.Any(entry => entry.Id == null))
                 throw new ArgumentException("All entries must have an entry id");
-            
+
             if (entries.Any(entry => entry.Links.SelfLink == null))
                 throw new ArgumentException("All entries must have a selflink");
 
@@ -265,7 +265,7 @@ namespace Spark.Store
 
             var query = MonQ.Query.EQ(BSON_RECORDID_MEMBER, entry.SelfLink.ToString());
 
-            if(batchId == null) batchId = Guid.NewGuid();
+            if (batchId == null) batchId = Guid.NewGuid();
             updateTimestamp(entry);
 
             var doc = entryToBsonDocument(entry);
@@ -275,9 +275,9 @@ namespace Spark.Store
             var coll = getResourceCollection();
 
             coll.Remove(query);
-            coll.Save(doc);            
+            coll.Save(doc);
         }
-        
+
         // This used to be an anonymous function. Should it be merged with entryToBsonDocument ? /mh
         private BsonDocument createDocFromEntry(BundleEntry entry, Guid batchId)
         {
@@ -359,7 +359,7 @@ namespace Spark.Store
         {
             // If a patient contains a birth date equal to the birth date of Bach, an exception is thrown
             // This is soleley for the purpose of testing transactions
-            foreach(BundleEntry entry in list)
+            foreach (BundleEntry entry in list)
             {
                 if (entry is ResourceEntry<Patient>)
                 {
@@ -382,7 +382,7 @@ namespace Spark.Store
             Guid _batchId = batchId ?? Guid.NewGuid();
 
             List<BundleEntry> _entries = entries.Where(e => isQuery(e)).ToList();
-            
+
             maximizeBinaryContents(_entries);
 
             if (Config.Settings.UseS3)
@@ -538,7 +538,7 @@ namespace Spark.Store
             IEnumerable<BsonValue> items = ResourceCollection.Distinct("category");
             return ParseToTags(items);
         }
-        
+
         public IEnumerable<Tag> ListTagsInCollection(string collection)
         {
             IMongoQuery query = MonQ.Query.EQ(BSON_COLLECTION_MEMBER, collection);
@@ -551,8 +551,13 @@ namespace Spark.Store
 
             var coll = database.GetCollection(COUNTERS_COLLECTION);
 
-            var resourceIdQuery = MonQ.Query.EQ("_id", "resourceId");
-            var newId = coll.FindAndModify(resourceIdQuery, null, MonQ.Update.Inc("last", 1), true, true);
+            var args = new FindAndModifyArgs();
+            args.Query = MonQ.Query.EQ("_id", "resourceId");
+            args.Update = MonQ.Update.Inc("last", 1);
+            args.VersionReturned = FindAndModifyDocumentVersion.Modified;
+            args.Upsert = true;
+
+            var newId = coll.FindAndModify(args);
 
             return newId.ModifiedDocument["last"].AsInt32;
         }
@@ -573,10 +578,10 @@ namespace Spark.Store
             }
             else
             {
-                var resourceIdQuery =
-                    MonQ.Query.And(MonQ.Query.EQ("_id", "resourceId"), MonQ.Query.LTE("last", seq));
-
-                counters.FindAndModify(resourceIdQuery, null, MonQ.Update.Set("last",seq));
+                var args = new FindAndModifyArgs();
+                args.Query = MonQ.Query.And(MonQ.Query.EQ("_id", "resourceId"), MonQ.Query.LTE("last", seq));
+                args.Update = MonQ.Update.Set("last", seq);
+                counters.FindAndModify(args);
             }
         }
 
@@ -584,8 +589,12 @@ namespace Spark.Store
         {
             var coll = database.GetCollection(COUNTERS_COLLECTION);
 
-            var resourceIdQuery = MonQ.Query.EQ("_id", "versionId");
-            var newId = coll.FindAndModify(resourceIdQuery, null, MonQ.Update.Inc("last", 1), true, true);
+            var args = new FindAndModifyArgs();
+            args.Query = MonQ.Query.EQ("_id", "versionId");
+            args.Update = MonQ.Update.Inc("last", 1);
+            args.VersionReturned = FindAndModifyDocumentVersion.Modified;
+            args.Upsert = true;
+            var newId = coll.FindAndModify(args);
 
             return newId.ModifiedDocument["last"].AsInt32;
         }
@@ -621,12 +630,12 @@ namespace Spark.Store
         {
             var coll = getResourceCollection();
 
-            coll.EnsureIndex(BSON_STATE_MEMBER, BSON_ENTRY_TYPE_MEMBER, BSON_COLLECTION_MEMBER);
-            coll.EnsureIndex(BSON_ID_MEMBER, BSON_STATE_MEMBER);
+            coll.CreateIndex(BSON_STATE_MEMBER, BSON_ENTRY_TYPE_MEMBER, BSON_COLLECTION_MEMBER);
+            coll.CreateIndex(BSON_ID_MEMBER, BSON_STATE_MEMBER);
 
             // Should support ListVersions() and ListVersionsInCollection()
             var versionKeys = MonQ.IndexKeys.Descending(BSON_VERSIONDATE_MEMBER).Ascending(BSON_COLLECTION_MEMBER);
-            coll.EnsureIndex(versionKeys);
+            coll.CreateIndex(versionKeys);
 
             //            versionKeys = IndexKeys.Descending(BSON_VERSIONDATE_MEMBER_ISO).Ascending(BSON_COLLECTION_MEMBER);
             //            coll.EnsureIndex(versionKeys);
@@ -656,7 +665,7 @@ namespace Spark.Store
             doc.Remove(BSON_BATCHID_MEMBER);
 
             var json = doc.ToJson();
-            
+
             BundleEntry e;
             try
             {
@@ -677,7 +686,7 @@ namespace Spark.Store
 
                     var blobId = calculateBlobName(be.Links.SelfLink);
 
-                    using(var blobStorage = getBlobStorage())
+                    using (var blobStorage = getBlobStorage())
                     {
                         if (blobStorage != null)
                         {
