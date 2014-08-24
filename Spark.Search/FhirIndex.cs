@@ -111,5 +111,11 @@ namespace Spark.Search
             // Currently this requires a ResourceType. We see no need for a database wide search.
             return Search(null, query);
         }
+
+
+        public SearchResults Search(Query query)
+        {
+            return searcher.Search(query);
+        }
     }
 }

@@ -18,6 +18,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Diagnostics;
 using Hl7.Fhir.Rest;
+using Hl7.Fhir.Introspection;
 
 namespace Spark.Search
 {
@@ -154,6 +155,22 @@ namespace Spark.Search
             }
         }
 
+        private string getEnumLiteral(Enum item)
+        {
+            Type type = item.GetType();
+            EnumMapping mapping = EnumMapping.Create(type);
+            //todo: Chaching these mappings should probably optimize performance. But for now load seems managable.
+            string literal = mapping.GetLiteral(item);
+            return literal;
+        }
+
+        public void Collect(Definition definition, Enum item)
+        {
+            var coding = new Coding();
+            coding.Code = getEnumLiteral(item);
+            Collect(definition, coding);    
+        }
+
         public bool Null(object x)
         {
             return (x == null);
@@ -187,6 +204,24 @@ namespace Spark.Search
                 };
             Write(InternalField.TAG, value);
         }
+        public void Collect(Definition definition, Quantity quantity)
+        {
+            if (definition.ParamType != Conformance.SearchParamType.Quantity)
+                return;
+ 
+            Quantity q = quantity.Standardize();
+            string system = (quantity.System != null) ? quantity.System.ToString() : null;
+            
+            BsonDocument block = new BsonDocument()
+                {
+                    { "system", system },
+                    { "value", q.GetValueAsBson() },
+                    { "decimals", q.GetDecimalSearchableValue() },
+                    { "unit", q.Units }
+                };
+            Write(definition.ParamName, block); 
+        }
+
         public void Collect(Definition definition, Coding coding)
         {
             string system = (coding.System != null) ? coding.System.ToString() : null;

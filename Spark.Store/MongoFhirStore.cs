@@ -24,6 +24,7 @@ using Hl7.Fhir.Rest;
 using Spark.Config;
 
 
+
 namespace Spark.Store
 {
 
@@ -48,13 +49,16 @@ namespace Spark.Store
         public const string RESOURCE_COLLECTION = "resources";
         private const string COUNTERS_COLLECTION = "counters";
         private const string SNAPSHOT_COLLECTION = "snapshots";
+        private MongoCollection<BsonDocument> collection; 
 
         public MongoFhirStore(MongoDatabase database)
         {
             this.database = database;
             transaction = new Transaction(this.ResourceCollection);
-
+            this.collection = database.GetCollection(RESOURCE_COLLECTION);
         }
+
+
         /// <summary>
         /// Retrieves an Entry by its id. This includes content and deleted entries.
         /// </summary>
@@ -128,6 +132,18 @@ namespace Spark.Store
             return sortedDocs.Select(doc => reconstituteBundleEntry(doc, fetchContent: true));
         }
 
+        public IEnumerable<BundleEntry> FindByIds(IEnumerable<Uri> ids)
+        {
+            var queries = new List<IMongoQuery>();
+            var keys = ids.Select(uri => (BsonValue)uri.ToString());
+
+            queries.Add(MonQ.Query.EQ(BSON_STATE_MEMBER, BSON_STATE_CURRENT));
+            queries.Add(MonQ.Query.In(BSON_ID_MEMBER, keys));
+
+            var documents = ResourceCollection.Find(MonQ.Query.And(queries));
+            return documents.Select(doc => reconstituteBundleEntry(doc, fetchContent: true));
+        }
+
         private class SnapshotSorter : IComparer<string>
         {
             Dictionary<string, int> keyPositions = new Dictionary<string, int>();
@@ -171,6 +187,36 @@ namespace Spark.Store
             return findAll(limit, since, onlyCurrent: false, includeDeleted: true);
         }
 
+
+        private IEnumerable<BsonValue> collectBsonKeys(IMongoQuery query, IMongoSortBy sortby = null)
+        {
+            MongoCursor<BsonDocument> cursor = collection.Find(query).SetFields(BSON_RECORDID_MEMBER);
+           
+            if (sortby != null)
+                cursor = cursor.SetSortOrder(sortby);
+
+            return cursor.Select(doc => doc.GetValue(BSON_RECORDID_MEMBER));
+        }
+
+        private IEnumerable<Uri> collectKeys(IMongoQuery query, IMongoSortBy sortby = null)
+        {
+            return collectBsonKeys(query, sortby).Select(key => new Uri(key.ToString(), UriKind.Relative));
+        }
+
+        public ICollection<Uri> HistoryKeys(DateTimeOffset? since = null)
+        {
+            DateTime? mongoSince = convertDateTimeOffsetToDateTime(since);
+            var queries = new List<IMongoQuery>();
+            
+            if (mongoSince != null)
+                queries.Add(MonQ.Query.GT(BSON_VERSIONDATE_MEMBER, BsonDateTime.Create(mongoSince)));
+
+            IMongoQuery query = MonQ.Query.And(queries);
+
+            IMongoSortBy sortby = MonQ.SortBy.Descending(BSON_VERSIONDATE_MEMBER);
+            return collectKeys(query, sortby).ToList();
+        }
+
         private IEnumerable<BundleEntry> findAll(int limit, DateTimeOffset? since, bool onlyCurrent, bool includeDeleted,
                                     Uri id = null, string collection = null)
         {
@@ -181,7 +227,7 @@ namespace Spark.Store
             var queries = new List<IMongoQuery>();
 
             if (mongoSince != null)
-                queries.Add(MonQ.Query.GT(BSON_VERSIONDATE_MEMBER, mongoSince));
+                queries.Add(MonQ.Query.GT(BSON_VERSIONDATE_MEMBER, BsonDateTime.Create(mongoSince)));
             if (onlyCurrent)
                 queries.Add(MonQ.Query.EQ(BSON_STATE_MEMBER, BSON_STATE_CURRENT));
             if (!includeDeleted)
@@ -399,7 +445,7 @@ namespace Spark.Store
                 transaction.Begin();
                 transaction.InsertBatch(docs);
 
-                TestTransactionTestException(entries.ToList());
+                // TestTransactionTestException(entries.ToList());
                 transaction.Commit();
             }
             catch
@@ -711,6 +757,54 @@ namespace Spark.Store
             get
             {
                 return database.GetCollection(RESOURCE_COLLECTION);
+            }
+        }
+
+        private List<Uri> harvestReferences(BundleEntry entry, string include)
+        {
+
+            List<Uri> keys = new List<Uri>();
+            Resource resource = (entry as ResourceEntry).Resource;
+            ElementQuery query = new ElementQuery(include);
+            query.Visit(resource, x =>
+            {
+                if (x is ResourceReference)
+                {
+                    Uri uri = (x as ResourceReference).Url;
+                    keys.Add(uri);
+                }
+            });
+            return keys;
+        }
+
+        private IEnumerable<Uri> harvestReferences(Bundle bundle, string include)
+        {
+            foreach (BundleEntry entry in bundle.Entries)
+            {
+                List<Uri> list = harvestReferences(entry, include);
+                foreach (Uri value in list)
+                {
+                    if (value != null)
+                        yield return value;
+                }
+            }
+        }         
+   
+        private void Include(Bundle bundle, string include)
+        {
+            List<Uri> keys = harvestReferences(bundle, include).Distinct().ToList();
+            foreach (BundleEntry entry in FindByIds(keys))
+            {
+                bundle.Entries.Add(entry);
+            }
+        }
+
+        public void Include(Bundle bundle, ICollection<string> includes)
+        {
+            if (includes != null)
+            foreach(string include in includes)
+            {
+                Include(bundle, include);
             }
         }
     }

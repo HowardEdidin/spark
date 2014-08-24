@@ -1,4 +1,12 @@
-﻿using MongoDB.Bson;
+﻿/* 
+ * Copyright (c) 2014, Furore (info@furore.com) and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.github.com/furore-fhir/spark/master/LICENSE
+ */
+
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using System;
@@ -49,7 +57,7 @@ namespace Spark.Store
                     { Field.Transaction, transid },
                 }
             );
-            collection.Update(query, update);
+            collection.Update(query, update, UpdateFlags.Multi);
         }
 
         public IEnumerable<BsonValue> Keys(IEnumerable<BsonDocument> documents)
@@ -74,7 +82,7 @@ namespace Spark.Store
                 }
             );
             IMongoQuery query = Query.And(Query.EQ(Field.Status, Value.Current),  Query.In(Field.Key, keys));
-            collection.Update(query, update);
+            collection.Update(query, update, UpdateFlags.Multi);
         }
 
         public void RemoveQueued(string transid)
@@ -95,7 +103,7 @@ namespace Spark.Store
                     { Field.Transaction, 0 }
                 }
             );
-            collection.Update(query, update);
+            collection.Update(query, update, UpdateFlags.Multi);
         }
         
         private void prepareNew(BsonDocument document)
@@ -123,7 +131,8 @@ namespace Spark.Store
                     { Field.Status, statusto }
                 }
             );
-            collection.Update(query, update);
+            collection.Update(query, update, UpdateFlags.Multi);
+            
         }
 
         public void Begin()

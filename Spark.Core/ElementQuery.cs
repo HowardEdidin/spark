@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Spark.Search
+namespace Spark.Core
 {
     // Legenda:
     // chain: List<string> chain = { "person", "family", "name" };
@@ -50,7 +50,9 @@ namespace Spark.Search
             private List<string> chain;
             public Chain(string path)
             {
+                path = path.Replace("[x]", "");
                 path = Regex.Replace(path, @"\b(\w)", match => match.Value.ToUpper());
+                
                 this.chain = path.Split('.').Skip(1).ToList();  // Skip(1), dat is nl. de class-naam zelf.
             }
             public void Visit(object field, Action<object> action)

@@ -26,7 +26,7 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Hl7.Fhir.Rest;
 using Spark.Config;
-
+using Hl7.Fhir.Search;
 
 namespace SparkTests.Search
 {

@@ -12,13 +12,19 @@ using System.Linq;
 using System.Web;
 
 using Hl7.Fhir.Support;
+using F = Hl7.Fhir.Model;
 using Spark.Core;
-using MongoDB.Driver.Builders;
+using M = MongoDB.Driver.Builders;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Hl7.Fhir.Search;
+using Hl7.Fhir.Model;
 
 namespace Spark.Search
 {
+
+
+
     public class MongoSearcher : ISearcher
     {
         private MongoCollection<BsonDocument> collection;
@@ -39,9 +45,9 @@ namespace Spark.Search
                 collector = CollectKeys(query);
 
                 Join join = parameter.Joins[i];
-                query = Query.In(join.Field, collector);
+                query = M.Query.In(join.Field, collector);
                 if (join.Resource != null)
-                    query = Query.And(query, Query.EQ(InternalField.RESOURCE, join.Resource));
+                    query = M.Query.And(query, M.Query.EQ(InternalField.RESOURCE, join.Resource));
             }
             return query;
         }
@@ -55,10 +61,10 @@ namespace Spark.Search
         private IMongoQuery ParametersToQuery(IEnumerable<IParameter> parameters)
         {
             List<IMongoQuery> queries = new List<IMongoQuery>();
-            queries.Add(Query.EQ(InternalField.LEVEL, 0)); // geindexeerde contained documents overslaan
+            queries.Add(M.Query.EQ(InternalField.LEVEL, 0)); // geindexeerde contained documents overslaan
             IEnumerable<IMongoQuery> q = parameters.Select(p => ParameterToQuery(p));
             queries.AddRange(q);
-            return Query.And(queries);
+            return M.Query.And(queries);
         }
 
         private List<BsonValue> CollectKeys(IMongoQuery query)
@@ -72,50 +78,11 @@ namespace Spark.Search
             List<BsonValue> keys = CollectKeys(query);
             return keys;
         }
-        private IEnumerable<BsonValue> CollectForeignKeys(List<BsonValue> keys, string resource, string foreignkey)
-        {
-            IMongoQuery query = Query.And(Query.EQ(InternalField.RESOURCE, resource), Query.In(InternalField.ID, keys));
-            MongoCursor<BsonDocument> cursor = collection.Find(query).SetFields(foreignkey);
-            return cursor.Select(doc => doc.GetValue(foreignkey));
-        }
-        private void Merge(List<BsonValue> keys, IEnumerable<BsonValue> mergekeys)
-        {
-            IEnumerable<BsonValue> newkeys = mergekeys.Except(keys);
-            keys.AddRange(newkeys);
-        }
-        private void Diverge(IncludeParameter include, List<BsonValue> keys)
-        {
-            // Dit is een omgekeerde Include: search: organization, params: patient.provider 
-            // geeft ook alle patienten vanwie de provider in de geselecteerde organisaties zit. 
-            IMongoQuery query = Query.And(Query.EQ(InternalField.RESOURCE, include.TargetResource), Query.In(include.TargetField, keys));
-            IEnumerable<BsonValue> output = CollectKeys(query);
-            Merge(keys, output);
-        }
-        private void Include(IncludeParameter include, List<BsonValue> keys)
-        {
-            IEnumerable<BsonValue> foreignkeys = CollectForeignKeys(keys, include.TargetResource, include.TargetField);
-            Merge(keys, foreignkeys);
-        }
-        private void Include(List<IncludeParameter> includes, List<BsonValue> keys)
-        {
-            includes.ForEach(include => Include(include, keys));
-        }
-        private void RecursiveInclude(List<IncludeParameter> includes, List<BsonValue> keys)
-        {
-            int lastcount, count = 0;
-            do
-            {
-                lastcount = count;
-                Include(includes, keys);
-                count = keys.Count();
-            }
-            while (lastcount != count);
-        }
 
         private SearchResults KeysToSearchResults(IEnumerable<BsonValue> keys)
         {
-            MongoCursor cursor = collection.Find(Query.In(InternalField.ID, keys)).SetFields(InternalField.SELFLINK);
-           
+            MongoCursor cursor = collection.Find(M.Query.In(InternalField.ID, keys)).SetFields(InternalField.SELFLINK);
+
             var results = new SearchResults();
             foreach (BsonDocument document in cursor)
             {
@@ -130,11 +97,155 @@ namespace Spark.Search
         {
             List<BsonValue> keys = CollectKeys(parameters.WhichFilter);
             int numMatches = keys.Count();
-            RecursiveInclude(parameters.Includes, keys);
+            //RecursiveInclude(parameters.Includes, keys);
             SearchResults results = KeysToSearchResults(keys.Take(parameters.Limit));
-            results.UsedParameters = parameters.UsedHttpQuery();
+            //results.UsedCriteria = parameters.UsedHttpQuery();
             results.MatchCount = numMatches;
             return results;
+        }
+
+        private List<BsonValue> CollectKeys(string resourceType, IEnumerable<Criterium> criteria)
+        {
+            return CollectKeys(resourceType, criteria, null);
+        }
+
+        private List<BsonValue> CollectKeys(string resourceType, IEnumerable<Criterium> criteria, SearchResults results)
+        {
+            //Mapping of original criterium and closed criterium, the former to be able to exclude it if it errors.
+            var closedCriteria = new Dictionary<Criterium, Criterium>();
+            foreach (var c in criteria)
+            {
+                if (c.Type == Operator.CHAIN)
+                {
+                    closedCriteria.Add(c, CloseCriterium(c, resourceType));
+                }
+                else
+                {
+                    closedCriteria.Add(c, c);
+                }
+            }
+
+            IMongoQuery resultQuery = CriteriaMongoExtensions.ResourceFilter(resourceType);
+            if (closedCriteria.Count() > 0)
+            {
+                var criteriaQueries = new List<IMongoQuery>();
+                foreach (var crit in closedCriteria)
+                {
+                    try
+                    {
+                        criteriaQueries.Add(crit.Value.ToFilter(resourceType));
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        if (results == null) throw;
+                        results.AddIssue(String.Format("Parameter [{0}] was ignored for the reason: {1}.", crit.Key.ToString(), ex.Message), OperationOutcome.IssueSeverity.Warning);
+                        results.UsedCriteria.Remove(crit.Key);
+                    }
+                }
+                if (criteriaQueries.Count > 0)
+                {
+                    IMongoQuery criteriaQuery = M.Query.And(criteriaQueries);
+                    resultQuery = M.Query.And(resultQuery, criteriaQuery);
+                }
+            }
+
+            return CollectKeys(resultQuery);
+        }
+
+        /// <summary>
+        /// CloseCriterium("patient.name=\"Teun\"") -> "patient=id1,id2"
+        /// </summary>
+        /// <param name="resourceType"></param>
+        /// <param name="crit"></param>
+        /// <returns></returns>
+        private Criterium CloseCriterium(Criterium crit, string resourceType)
+        {
+
+            List<string> targeted = crit.GetTargetedReferenceTypes(resourceType);
+            List<string> allKeys = new List<string>();
+            foreach (var target in targeted)
+            {
+                var keys = CollectKeys(target, new List<Criterium> { (Criterium)crit.Operand });               //Recursive call to CollectKeys!
+                allKeys.AddRange(keys.Select(k => k.ToString()));
+            }
+            crit.Type = Operator.IN;
+            crit.Operand = ChoiceValue.Parse(String.Join(",", allKeys));
+            return crit;
+        }
+
+        /// <summary>
+        /// Change something like Condition/subject:Patient=Patient/10014 
+        /// to Condition/subject:Patient.internal_id=Patient/10014, so it is correctly handled as a chained parameter, 
+        /// including the filtering on the type in the modifier (if any).
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <param name="resourceType"></param>
+        /// <returns></returns>
+        private List<Criterium> NormalizeNonChainedReferenceCriteria(List<Criterium> criteria, string resourceType)
+        {
+            var result = new List<Criterium>();
+
+            foreach (var crit in criteria)
+            {
+                var critSp = crit.FindSearchParamDefinition(resourceType);
+                if (critSp != null && critSp.Type == Conformance.SearchParamType.Reference && crit.Type != Operator.CHAIN)
+                {
+                    var subCrit = new Criterium();
+                    subCrit.ParamName = InternalField.ID;
+                    subCrit.Type = crit.Type;
+                    subCrit.Operand = crit.Operand;
+
+                    var superCrit = new Criterium();
+                    superCrit.ParamName = crit.ParamName;
+                    superCrit.Modifier = crit.Modifier;
+                    superCrit.Type = Operator.CHAIN;
+                    superCrit.Operand = subCrit;
+
+                    result.Add(superCrit);
+                }
+                else result.Add(crit);
+            }
+
+            return result;
+        }
+
+        public SearchResults Search(F.Query query)
+        {
+            SearchResults results = new SearchResults();
+
+            var criteria = parseCriteria(query, results);
+
+            if (!results.HasErrors)
+            {
+                results.UsedCriteria = criteria;
+                var normalizedCriteria = NormalizeNonChainedReferenceCriteria(criteria, query.ResourceType);
+                List<BsonValue> keys = CollectKeys(query.ResourceType, normalizedCriteria, results);
+
+                int numMatches = keys.Count();
+
+                results.AddRange(KeysToSearchResults(keys));
+                results.MatchCount = numMatches;
+            }
+
+            return results;
+
+        }
+
+        private List<Criterium> parseCriteria(F.Query query, SearchResults results)
+        {
+            var result = new List<Criterium>();
+            foreach (var c in query.Criteria)
+            {
+                try
+                {
+                    result.Add(Criterium.Parse(c));
+                }
+                catch (Exception ex)
+                {
+                    results.AddIssue(String.Format("Could not parse parameter [{0}] for reason [{1}].", c.ToString(), ex.Message));
+                }
+            }
+            return result;
         }
     }
 }

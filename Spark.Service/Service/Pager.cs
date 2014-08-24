@@ -24,7 +24,6 @@ namespace Spark.Service
 {
     internal class Pager
     {
-        
         IFhirStore _store;
         public const int MAX_PAGE_SIZE = 100;
 
@@ -82,24 +81,24 @@ namespace Spark.Service
             var entryVersionIds = snapshot.Contents.Skip(start).Take(count).ToList();
             var pageContents = _store.FindByVersionIds(entryVersionIds).ToList();
 
-            var resultBundle =
+            var bundle =
                 BundleEntryFactory.CreateBundleWithEntries(snapshot.FeedTitle, new Uri(snapshot.FeedSelfLink),
                       "Spark MatchBox Search Engine", null, pageContents);
 
             if (snapshot.MatchCount != Snapshot.NOCOUNT)
-                resultBundle.TotalResults = snapshot.MatchCount;
+                bundle.TotalResults = snapshot.MatchCount;
             else
-                resultBundle.TotalResults = null;
+                bundle.TotalResults = null;
+
+            var total = snapshot.Contents.Count();
 
             // If we need paging, add the paging links
-            if (snapshot.Contents.Count() > count)
-                buildLinks(resultBundle, snapshot.Id, start, count, resultBundle.TotalResults.Value);
+            if (total > count)
+                buildLinks(bundle, snapshot.Id, start, count, total);
 
-            return resultBundle;
+            return bundle;
         }
 
-
-        
         private static void buildLinks(Bundle bundle, string snapshotId, int index, int pageSize, int count)
         {
             var lastPage = count / pageSize;
