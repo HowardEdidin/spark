@@ -23,6 +23,11 @@ namespace Spark.Service
             this._endpoint = endpoint;
         }
 
+        public void UpdateEndpoint(Uri endpoint)
+        {
+            _endpoint = endpoint;
+        }
+        
         public void EnsureAbsoluteUris(Bundle bundle)
         {
             bundle.Id = makeAbsolute(bundle.Id);

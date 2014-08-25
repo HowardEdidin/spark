@@ -73,7 +73,18 @@ namespace Spark.Config
             get 
             {
                 string endpoint = AppSettings.Get("FHIR_ENDPOINT");
-                return new Uri(endpoint, UriKind.Absolute); 
+                if (HttpContext.Current == null || HttpContext.Current.Request == null)
+                    return new Uri(endpoint, UriKind.Absolute);
+
+                // This approach will ensure that the requested call will return the requested URI, rather than a configured one.
+                string fhirVirtualFolder = System.Web.Http.GlobalConfiguration.Configuration.VirtualPathRoot.TrimEnd('/') + "/fhir";
+                Uri current = HttpContext.Current.Request.Url;
+                
+                string endpointResult = String.Format("{0}://{1}{2}{3}", current.Scheme, current.Host, 
+                                                            current.Port == 80 && current.Scheme == "http"
+                                                            || current.Port == 443 && current.Scheme == "https" ? "" : ":" + current.Port.ToString(),
+                                                            fhirVirtualFolder);
+                return new Uri(endpointResult, UriKind.Absolute);
             }
         }
        

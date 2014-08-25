@@ -31,7 +31,13 @@ namespace Spark.Service
         private Uri _endpoint;
         public SharedEndpoints SharedEndpoints = new SharedEndpoints();
 
-        public ResourceImporter(IFhirStore store, Uri endpoint)
+		public void UpdateEndpoint(Uri endpoint)
+		{
+			_endpoint = endpoint;
+			SharedEndpoints.Add(_endpoint);
+		}
+
+		public ResourceImporter(IFhirStore store, Uri endpoint)
         {
             _endpoint = endpoint;
             _store = store;

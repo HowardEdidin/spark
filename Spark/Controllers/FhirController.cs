@@ -31,10 +31,26 @@ namespace Spark.Controllers
     [EnableCors("*","*","*","*")]
     public class FhirController : ApiController
     {
-        IFhirService service; 
+		protected override void Initialize(System.Web.Http.Controllers.HttpControllerContext controllerContext)
+		{
+			base.Initialize(controllerContext);
+
+			// This approach will ensure that the requested call will return the requested URI, rather than a configured one.
+			string fhirVirtualFolder = System.Web.Http.GlobalConfiguration.Configuration.VirtualPathRoot.TrimEnd('/') + "/fhir";
+			Uri current = controllerContext.Request.RequestUri;
+
+			string endpointResult = String.Format("{0}://{1}{2}{3}", current.Scheme, current.Host,
+														current.Port == 80 && current.Scheme == "http"
+														|| current.Port == 443 && current.Scheme == "https" ? "" : ":" + current.Port.ToString(),
+														fhirVirtualFolder);
+
+			service = DependencyCoupler.Inject<IFhirService>();
+			service.Endpoint = new Uri(endpointResult, UriKind.Absolute);
+		}
+
+		IFhirService service; 
         public FhirController()
         {
-            service = DependencyCoupler.Inject<IFhirService>();
         }
 
 

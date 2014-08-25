@@ -34,7 +34,9 @@ namespace Spark.Core
 
     public interface IFhirService
     {
-        ResourceEntry Conformance();
+		Uri Endpoint { get; set; }
+
+		ResourceEntry Conformance();
         
         ResourceEntry Read(string type, string id);
         ResourceEntry VRead(string type, string id, string version);
