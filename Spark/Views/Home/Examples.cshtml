@@ -8,19 +8,19 @@ ATOM (rss-feed) and most browsers have a visual display for that.
 <h4>Read</h4>
 A simple fetch from an individual resource:
 <div class="examples">
-    <a href="/fhir/Patient/1">/fhir/Patient/1</a><br />
+	<a href="@Spark.Config.Settings.Endpoint/Patient/1">/fhir/Patient/1</a><br />
 </div>
 
 A FHIR resource can be fetched both as XML or as Json. The regular way to achieve this is by adding an http header "Conten-Type:".
 Alternatively you can overrule the headers with a _format parameter:
 <div class="examples">
-    <a href="/fhir/Patient/1?_format=application/json">/fhir/Patient/1?_format=application/json</a>
+	<a href="@Spark.Config.Settings.Endpoint/Patient/1?_format=application/json">/fhir/Patient/1?_format=application/json</a>
 </div>
 
 <h4>Version Read</h4>
 To fetch an older version of a resource, use the version read. With the following url you can fetch a specific (history) version from a patient resource.
 <div class="examples">
-    <a href="/fhir/Patient/1/_history/447">/fhir/Patient/1/_history/447</a><br />
+	<a href="@Spark.Config.Settings.Endpoint/Patient/1/_history/447">/fhir/Patient/1/_history/447</a><br />
 </div>
 
 
@@ -33,7 +33,7 @@ for the list of parameters is here:
 
 A simple example of a search on organization:
 <div class="examples">
-    <a href="/fhir/Organization?name=international">/fhir/Organization?name=international</a><br />
+	<a href="@Spark.Config.Settings.Endpoint/Organization?name=international">/fhir/Organization?name=international</a><br />
 </div>
 
 <h2>Advanced</h2>

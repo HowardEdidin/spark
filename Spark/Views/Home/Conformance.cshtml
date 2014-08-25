@@ -4,7 +4,7 @@
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://spark.furore.com/fhir/metadata",
+            url: "@Spark.Config.Settings.Endpoint/metadata",
             dataType: "xml",
             success: function (xml) {
                 $("#chart").empty();
@@ -15,15 +15,15 @@
                     var entity = $(this).find('type').attr("value");
 
                     var operations = "";
-                    $(this).find("operation").each(function () {
+                    $(this).find("interaction").each(function () {
                         operations = operations + "<span>" + $(this).find("code").attr("value") + "</span>";
                     });
 
-                    
+
 
                     $('<tr></tr>').html('<td>' + entity + '</td><td class="ops">' + operations + '</td>').appendTo('#chart');
 
-                    
+
                 });
             }
         });
