@@ -6,7 +6,7 @@ The database of this server contains the following resources:
     @foreach (var stat in Model.ResourceStats)
     {
         <tr>
-            <td>@stat.ResourceName</td>
+            <td><a href="@Spark.Config.Settings.Endpoint/@stat.ResourceName">@stat.ResourceName</a></td>
             <td>@stat.Count</td>
         </tr>
     }

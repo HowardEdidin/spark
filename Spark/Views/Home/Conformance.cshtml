@@ -1,10 +1,10 @@
 ﻿<h2>Conformance statement</h2>
 
 <script>
-    $(document).ready(function () {
-        $.ajax({
-            type: "GET",
-            url: "@Spark.Config.Settings.Endpoint/metadata",
+	$(document).ready(function () {
+		$.ajax({
+			type: "GET",
+			url: "@Spark.Config.Settings.Endpoint/metadata",
             dataType: "xml",
             success: function (xml) {
                 $("#chart").empty();
@@ -21,7 +21,7 @@
 
 
 
-                    $('<tr></tr>').html('<td>' + entity + '</td><td class="ops">' + operations + '</td>').appendTo('#chart');
+                    $('<tr></tr>').html('<td><a href="@Spark.Config.Settings.Endpoint/' + entity + '">' + entity + '</a></td><td class="ops">' + operations + '</td>').appendTo('#chart');
 
 
                 });
