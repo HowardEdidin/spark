@@ -4,6 +4,512 @@
         <name>Hl7.Fhir.Model</name>
     </assembly>
     <members>
+        <member name="T:Hl7.Fhir.Model.Appointment">
+            <summary>
+            (informative) A scheduled appointment for a patient and/or practitioner(s) where a service may take place
+            </summary>
+        </member>
+        <member name="M:Hl7.Fhir.Model.Resource.FindContainedResource(Hl7.Fhir.Model.ResourceReference)">
+            <summary>
+            Finds a Resource amongst this Resource's contained resources
+            </summary>
+            <param name="containedReference">A ResourceReference containing an anchored resource id.</param>
+            <returns>The found resource, or null if no matching contained resource was found. Will throw an exception if there's more than
+            one matching contained resource</returns>
+        </member>
+        <member name="M:Hl7.Fhir.Model.Resource.FindContainedResource(System.Uri)">
+            <summary>
+            Finds a Resource amongst this Resource's contained resources
+            </summary>
+            <param name="containedReference">A Uri containing an anchored resource id.</param>
+            <returns>The found resource, or null if no matching contained resource was found. Will throw an exception if there's more than
+            one matching contained resource</returns>
+        </member>
+        <member name="M:Hl7.Fhir.Model.Resource.FindContainedResource(System.String)">
+            <summary>
+            Finds a Resource amongst this Resource's contained resources
+            </summary>
+            <param name="containedReference">A string containing an anchored resource id.</param>
+            <returns>The found resource, or null if no matching contained resource was found. Will throw an exception if there's more than
+            one matching contained resource</returns>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.Extension">
+            <summary>
+            Additional Content defined by implementations
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.ModifierExtension">
+            <summary>
+            Extensions that cannot be ignored
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.LanguageElement">
+            <summary>
+            Language of the resource content
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.Language">
+            <summary>
+            Language of the resource content
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.Text">
+            <summary>
+            Text summary of the resource, for human interpretation
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.Contained">
+            <summary>
+            Contained, inline Resources
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Resource.Id">
+            <summary>
+            Local id for element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Identifier">
+            <summary>
+            External Ids for this item
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.PriorityElement">
+            <summary>
+            The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority) (Need to change back to CodeableConcept)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Priority">
+            <summary>
+            The priority of the appointment. Can be used to make informed decisions if needing to re-prioritize appointments. (The iCal Standard specifies 0 as undefined, 1 as highest, 9 as lowest priority) (Need to change back to CodeableConcept)
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.StatusElement">
+            <summary>
+            The overall status of the Appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Status">
+            <summary>
+            The overall status of the Appointment
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Type">
+            <summary>
+            The type of appointments that is being booked (ideally this would be an identifiable service - which is at a location, rather than the location itself)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Reason">
+            <summary>
+            The reason that this appointment is being scheduled, this is more clinical than administrative
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.DescriptionElement">
+            <summary>
+            The brief description of the appointment as would be shown on a subject line in a meeting request, or appointment list. Detailed or expanded information should be put in the comment field
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Description">
+            <summary>
+            The brief description of the appointment as would be shown on a subject line in a meeting request, or appointment list. Detailed or expanded information should be put in the comment field
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.StartElement">
+            <summary>
+            Date/Time that the appointment is to take place
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Start">
+            <summary>
+            Date/Time that the appointment is to take place
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.EndElement">
+            <summary>
+            Date/Time that the appointment is to conclude
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.End">
+            <summary>
+            Date/Time that the appointment is to conclude
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Slot">
+            <summary>
+            The slot that this appointment is filling. If provided then the schedule will not be provided as slots are not recursive, and the start/end values MUST be the same as from the slot
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Location">
+            <summary>
+            The primary location that this appointment is to take place
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.CommentElement">
+            <summary>
+            Additional comments about the appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Comment">
+            <summary>
+            Additional comments about the appointment
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Order">
+            <summary>
+            An Order that lead to the creation of this appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.Participant">
+            <summary>
+            List of participants involved in the appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.LastModifiedBy">
+            <summary>
+            Who recorded the appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.LastModifiedElement">
+            <summary>
+            Date when the appointment was recorded
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.LastModified">
+            <summary>
+            Date when the appointment was recorded
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Appointment.AppointmentStatus">
+            <summary>
+            The free/busy status of an appointment
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.AppointmentStatus.Busy">
+            <summary>
+            The participant(s) will be unavailable during this appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.AppointmentStatus.Free">
+            <summary>
+            The participant(s) will still be available during this appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.AppointmentStatus.Tentative">
+            <summary>
+            This appointment has not been confirmed, and may become available.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.AppointmentStatus.Outofoffice">
+            <summary>
+            The participant(s) will not be at the usual location.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Appointment.ParticipantRequired">
+            <summary>
+            Is the Participant required to attend the appointment
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipantRequired.Required">
+            <summary>
+            The participant is required to attend the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipantRequired.Optional">
+            <summary>
+            The participant may optionally attend the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipantRequired.InformationOnly">
+            <summary>
+            The participant is not required to attend the appointment (appointment is about them, not for them).
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Appointment.ParticipationStatus">
+            <summary>
+            The Participation status of an appointment
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipationStatus.Accepted">
+            <summary>
+            The participant has accepted the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipationStatus.Declined">
+            <summary>
+            The participant has declined the appointment and will not participate in the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipationStatus.Tentative">
+            <summary>
+            The participant has  tentatively accepted the appointment. This could be automatically created by a system and requires further processing before it can be accepted. There is no commitment that attendance will occur.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipationStatus.InProcess">
+            <summary>
+            The participant has started the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipationStatus.Completed">
+            <summary>
+            The participant's involvement in the appointment has been completed.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Appointment.ParticipationStatus.NeedsAction">
+            <summary>
+            The participant needs to indicate if they accept the appointment by changing this status to one of the other statuses.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Element">
+            <summary>
+            Basetype for all composite-typed elements
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Element.Extension">
+            <summary>
+            Additional Content defined by implementations
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Element.ModifierExtension">
+            <summary>
+            Extensions that cannot be ignored
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Element.Id">
+            <summary>
+            Local id for element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.AppointmentParticipantComponent.Type">
+            <summary>
+            Role of participant in the appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.AppointmentParticipantComponent.Actor">
+            <summary>
+            A Person of device that is participating in the appointment, usually Practitioner, Patient, RelatedPerson or Device
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.AppointmentParticipantComponent.RequiredElement">
+            <summary>
+            required | optional | information-only
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.AppointmentParticipantComponent.Required">
+            <summary>
+            required | optional | information-only
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.AppointmentParticipantComponent.StatusElement">
+            <summary>
+            accepted | declined | tentative | in-process | completed | needs-action
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Appointment.AppointmentParticipantComponent.Status">
+            <summary>
+            accepted | declined | tentative | in-process | completed | needs-action
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="T:Hl7.Fhir.Model.AppointmentResponse">
+            <summary>
+            A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.Identifier">
+            <summary>
+            External Ids for this item
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.Appointment">
+            <summary>
+            Parent appointment that this response is replying to
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.ParticipantType">
+            <summary>
+            Role of participant in the appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.Individual">
+            <summary>
+            A Person of device that is participating in the appointment, usually Practitioner, Patient, RelatedPerson or Device
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus_Element">
+            <summary>
+            accepted | declined | tentative | in-process | completed | needs-action
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus_">
+            <summary>
+            accepted | declined | tentative | in-process | completed | needs-action
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.CommentElement">
+            <summary>
+            Additional comments about the appointment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.Comment">
+            <summary>
+            Additional comments about the appointment
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.StartElement">
+            <summary>
+            Date/Time that the appointment is to take place
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.Start">
+            <summary>
+            Date/Time that the appointment is to take place
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.EndElement">
+            <summary>
+            Date/Time that the appointment is to conclude
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.End">
+            <summary>
+            Date/Time that the appointment is to conclude
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.LastModifiedBy">
+            <summary>
+            Who recorded the appointment response
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.LastModifiedElement">
+            <summary>
+            Date when the response was recorded or last updated
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.AppointmentResponse.LastModified">
+            <summary>
+            Date when the response was recorded or last updated
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="T:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus">
+            <summary>
+            The Participation status of an appointment
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus.Accepted">
+            <summary>
+            The appointment participant has accepted that they can attend the appointment at the time specified in the AppointmentResponse.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus.Declined">
+            <summary>
+            The appointment participant has declined the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus.Tentative">
+            <summary>
+            The appointment participant has tentatively accepted the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus.InProcess">
+            <summary>
+            The participant has in-process the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus.Completed">
+            <summary>
+            The participant has completed the appointment.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AppointmentResponse.ParticipantStatus.NeedsAction">
+            <summary>
+            This is the intitial status of an appointment participant until a participant has replied. It implies that there is no commitment for the appointment.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Availability">
+            <summary>
+            (informative) A container for slot(s) of time that may be available for booking appointments
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.Identifier">
+            <summary>
+            External Ids for this item
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.Type">
+            <summary>
+            The schedule type can be used for the categorization of healthcare services or other appointment types
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.Actor">
+            <summary>
+            The resource this availability resource is providing availability information for. These are expected to usually be one of HealthcareService, Location, Practitioner, Device, Patient or RelatedPerson
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.PlanningHorizon">
+            <summary>
+            The period of time that the slots that are attached to this availability resource cover (even if none exist). These  cover the amount of time that an organization's planning horizon; the interval for which they are currently accepting appointments. This does not define a "template" for planning outside these dates
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.CommentElement">
+            <summary>
+            Comments on the availability to describe any extended information. Such as custom constraints on the slot(s) that may be associated
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.Comment">
+            <summary>
+            Comments on the availability to describe any extended information. Such as custom constraints on the slot(s) that may be associated
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.LastModifiedElement">
+            <summary>
+            When this availability was created, or last revised
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Availability.LastModified">
+            <summary>
+            When this availability was created, or last revised
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="T:Hl7.Fhir.Model.AdministrativeGender">
+            <summary>
+            The gender of a person used for administrative purposes
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AdministrativeGender.Male">
+            <summary>
+            Male
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AdministrativeGender.Female">
+            <summary>
+            Female
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AdministrativeGender.Other">
+            <summary>
+            Other
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.AdministrativeGender.Unknown">
+            <summary>
+            Unknown
+            </summary>
+        </member>
         <member name="T:Hl7.Fhir.Model.DataAbsentReason">
             <summary>
             Used to specify why the normally expected content of the data element is missing
@@ -109,6 +615,21 @@
             The AllergyIntolerance resource
             </summary>
         </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.Appointment">
+            <summary>
+            The Appointment resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.AppointmentResponse">
+            <summary>
+            The AppointmentResponse resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.Availability">
+            <summary>
+            The Availability resource
+            </summary>
+        </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.CarePlan">
             <summary>
             The CarePlan resource
@@ -132,6 +653,16 @@
         <member name="F:Hl7.Fhir.Model.ResourceType.Conformance">
             <summary>
             The Conformance resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.Contraindication">
+            <summary>
+            The Contraindication resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.DataElement">
+            <summary>
+            The DataElement resource
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.Device">
@@ -177,6 +708,11 @@
         <member name="F:Hl7.Fhir.Model.ResourceType.Group">
             <summary>
             The Group resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.HealthcareService">
+            <summary>
+            The HealthcareService resource
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.ImagingStudy">
@@ -239,9 +775,19 @@
             The MessageHeader resource
             </summary>
         </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.Namespace">
+            <summary>
+            The Namespace resource
+            </summary>
+        </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.Observation">
             <summary>
             The Observation resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.OperationDefinition">
+            <summary>
+            The OperationDefinition resource
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.OperationOutcome">
@@ -304,9 +850,24 @@
             The Questionnaire resource
             </summary>
         </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.QuestionnaireAnswers">
+            <summary>
+            The QuestionnaireAnswers resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.ReferralRequest">
+            <summary>
+            The ReferralRequest resource
+            </summary>
+        </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.RelatedPerson">
             <summary>
             The RelatedPerson resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.RiskAssessment">
+            <summary>
+            The RiskAssessment resource
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.SecurityEvent">
@@ -314,9 +875,19 @@
             The SecurityEvent resource
             </summary>
         </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.Slot">
+            <summary>
+            The Slot resource
+            </summary>
+        </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.Specimen">
             <summary>
             The Specimen resource
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ResourceType.Subscription">
+            <summary>
+            The Subscription resource
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.ResourceType.Substance">
@@ -339,6 +910,639 @@
             The Binary resource
             </summary>
         </member>
+        <member name="T:Hl7.Fhir.Model.Contraindication">
+            <summary>
+            Clinical issue with action
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Patient">
+            <summary>
+            Associated patient
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Category">
+            <summary>
+            E.g. Drug-drug, duplicate therapy, etc.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.SeverityElement">
+            <summary>
+            high | medium | low
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Severity">
+            <summary>
+            high | medium | low
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Implicated">
+            <summary>
+            Problem resource
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.DetailElement">
+            <summary>
+            Description and context
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Detail">
+            <summary>
+            Description and context
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.DateElement">
+            <summary>
+            When identified
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Date">
+            <summary>
+            When identified
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Author">
+            <summary>
+            Who found issue?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Identifier">
+            <summary>
+            Unique id for the contraindication
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.ReferenceElement">
+            <summary>
+            Authority for issue
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Reference">
+            <summary>
+            Authority for issue
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.Mitigation">
+            <summary>
+            Step taken to address
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.ContraindicationMitigationComponent.Action">
+            <summary>
+            What mitigation?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.ContraindicationMitigationComponent.DateElement">
+            <summary>
+            Date committed
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.ContraindicationMitigationComponent.Date">
+            <summary>
+            Date committed
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Contraindication.ContraindicationMitigationComponent.Author">
+            <summary>
+            Who is committing?
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.DataElement">
+            <summary>
+            Resource data element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Identifier">
+            <summary>
+            Logical id to reference this data element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.VersionElement">
+            <summary>
+            Logical id for this version of the data element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Version">
+            <summary>
+            Logical id for this version of the data element
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.PublisherElement">
+            <summary>
+            Name of the publisher (Organization or individual)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Publisher">
+            <summary>
+            Name of the publisher (Organization or individual)
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Telecom">
+            <summary>
+            Contact information of the publisher
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.StatusElement">
+            <summary>
+            draft | active | retired
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Status">
+            <summary>
+            draft | active | retired
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DateElement">
+            <summary>
+            Date for this version of the data element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Date">
+            <summary>
+            Date for this version of the data element
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.NameElement">
+            <summary>
+            Descriptive label for this element definition
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Name">
+            <summary>
+            Descriptive label for this element definition
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Category">
+            <summary>
+            Assist with indexing and finding
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Code">
+            <summary>
+            Identifying concept
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.QuestionElement">
+            <summary>
+            How to ask for element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Question">
+            <summary>
+            How to ask for element
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DefinitionElement">
+            <summary>
+            Full formal definition in human language
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Definition">
+            <summary>
+            Full formal definition in human language
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.CommentsElement">
+            <summary>
+            Comments about the use of this element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Comments">
+            <summary>
+            Comments about the use of this element
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.RequirementsElement">
+            <summary>
+            Why is this needed?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Requirements">
+            <summary>
+            Why is this needed?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.SynonymElement">
+            <summary>
+            Other names
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Synonym">
+            <summary>
+            Other names
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.TypeElement">
+            <summary>
+            Name of Data type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Type">
+            <summary>
+            Name of Data type
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Example">
+            <summary>
+            Example value: [as defined for type]
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.MaxLengthElement">
+            <summary>
+            Length for strings
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.MaxLength">
+            <summary>
+            Length for strings
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Units">
+            <summary>
+            Units to use for measured value
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Binding">
+            <summary>
+            ValueSet details if this is coded
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.Mapping">
+            <summary>
+            Map element to another set of definitions
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.DataElement.ResourceDataElementStatus">
+            <summary>
+            The lifecycle status of a Resource data element
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.DataElement.ResourceDataElementStatus.Draft">
+            <summary>
+            This data element is still under development.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.DataElement.ResourceDataElementStatus.Active">
+            <summary>
+            This data element is ready for normal use.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.DataElement.ResourceDataElementStatus.Retired">
+            <summary>
+            This data element has been deprecated, withdrawn or superseded and should no longer be used.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.UriElement">
+            <summary>
+            Identifies what this mapping refers to
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.Uri">
+            <summary>
+            Identifies what this mapping refers to
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.NameElement">
+            <summary>
+            Names what this mapping refers to
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.Name">
+            <summary>
+            Names what this mapping refers to
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.CommentsElement">
+            <summary>
+            Versions, Issues, Scope limitations etc
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.Comments">
+            <summary>
+            Versions, Issues, Scope limitations etc
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.MapElement">
+            <summary>
+            Details of the mapping
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementMappingComponent.Map">
+            <summary>
+            Details of the mapping
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.IsExtensibleElement">
+            <summary>
+            Can additional codes be used?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.IsExtensible">
+            <summary>
+            Can additional codes be used?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.ConformanceElement">
+            <summary>
+            required | preferred | example
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.Conformance">
+            <summary>
+            required | preferred | example
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.DescriptionElement">
+            <summary>
+            Human explanation of the value set
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.Description">
+            <summary>
+            Human explanation of the value set
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DataElement.DataElementBindingComponent.ValueSet">
+            <summary>
+            Source of value set
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.HealthcareService">
+            <summary>
+            (informative) The details of a Healthcare Service that is available at a location
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Identifier">
+            <summary>
+            External Ids for this item
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Location">
+            <summary>
+            The location where this healthcare service may be provided
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ServiceCategory">
+            <summary>
+            Identifies the broad category of service being performed or delivered. Selecting a Service Category then determines the list of relevant service types that can be selected in the Primary Service Type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.PrimaryServiceType">
+            <summary>
+            The specific type of service being delivered or performed
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.AdditionalServiceType">
+            <summary>
+            Secondary Service types for this particular service
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ServiceNameElement">
+            <summary>
+            Further description of the service as it would be presented to a consumer while searching
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ServiceName">
+            <summary>
+            Further description of the service as it would be presented to a consumer while searching
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.CommentElement">
+            <summary>
+            Additional description of the  or any specific issues not covered by the other attributes, which can be displayed as further detail under the serviceName
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Comment">
+            <summary>
+            Additional description of the  or any specific issues not covered by the other attributes, which can be displayed as further detail under the serviceName
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ExtraDetailsElement">
+            <summary>
+            Extra details about the service that can't be placed in the other fields
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ExtraDetails">
+            <summary>
+            Extra details about the service that can't be placed in the other fields
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.FreeProvisionCode">
+            <summary>
+            The free provision code provides a link to the Free Provision reference entity to enable the selection of one free provision type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Eligibility">
+            <summary>
+            Does this service have specific eligibility requirements that need to be met in order to use the service
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.EligibilityNoteElement">
+            <summary>
+            Describes the eligibility conditions for the service
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.EligibilityNote">
+            <summary>
+            Describes the eligibility conditions for the service
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.AppointmentRequired">
+            <summary>
+            Indicates whether or not a prospective consumer will require an appointment for a particular service at a Site to be provided by the Organization. Indicates if an appointment is required for access to this service. If this flag is 'NotDefined', then this flag is overridden by the Site's availability flag. (ConditionalIndicator Enum)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ImageURIElement">
+            <summary>
+            If there is an image associated with this Service Site, its URI can be included here
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ImageURI">
+            <summary>
+            If there is an image associated with this Service Site, its URI can be included here
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.AvailableTime">
+            <summary>
+            A Collection of times that the Service Site is available
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.NotAvailableTime">
+            <summary>
+            Not avail times - need better description
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.AvailabilityExceptionsElement">
+            <summary>
+            A description of Site availability exceptions, e.g., public holiday availability. Succinctly describing all possible exceptions to normal Site availability as details in the Available Times and Not Available Times
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.AvailabilityExceptions">
+            <summary>
+            A description of Site availability exceptions, e.g., public holiday availability. Succinctly describing all possible exceptions to normal Site availability as details in the Available Times and Not Available Times
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.PublicKeyElement">
+            <summary>
+            The public part of the 'keys' allocated to an Organization by an accredited body to support secure exchange of data over the internet. To be provided by the Organization, where available
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.PublicKey">
+            <summary>
+            The public part of the 'keys' allocated to an Organization by an accredited body to support secure exchange of data over the internet. To be provided by the Organization, where available
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ProgramNameElement">
+            <summary>
+            Program Names that can be used to categorize the service
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ProgramName">
+            <summary>
+            Program Names that can be used to categorize the service
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ContactPoint">
+            <summary>
+            List of contacts related to this specific healthcare service. If this is empty, then refer to the location's contacts
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Characteristic">
+            <summary>
+            Collection of Characteristics (attributes)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.ReferralMethod">
+            <summary>
+            Ways that the service accepts referrals
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Setting">
+            <summary>
+            The setting where this service can be provided, such is in home, or at location in organisation
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.TargetGroup">
+            <summary>
+            Collection of Target Groups for the Service Site (The target audience that this service is for)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.CoverageArea">
+            <summary>
+            Need better description
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.CatchmentArea">
+            <summary>
+            Need better description
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.Specialty">
+            <summary>
+            Collection of Specialties handled by the Service Site. This is more of a Medical Term
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.DaysOfWeek">
+            <summary>
+            Indicates which Days of the week are available between the Start and End Times
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.AllDayElement">
+            <summary>
+            Is this always available? (hence times are irrelevant) e.g. 24 hour service
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.AllDay">
+            <summary>
+            Is this always available? (hence times are irrelevant) e.g. 24 hour service
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.AvailableStartTimeElement">
+            <summary>
+            The opening time of day (the date is not included). Note: If the AllDay flag is set, then this time is ignored
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.AvailableStartTime">
+            <summary>
+            The opening time of day (the date is not included). Note: If the AllDay flag is set, then this time is ignored
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.AvailableEndTimeElement">
+            <summary>
+            The closing time of day (the date is not included). Note: If the AllDay flag is set, then this time is ignored
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceAvailableTimeComponent.AvailableEndTime">
+            <summary>
+            The closing time of day (the date is not included). Note: If the AllDay flag is set, then this time is ignored
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceNotAvailableTimeComponent.DescriptionElement">
+            <summary>
+            The reason that can be presented to the user as to why this time is not available
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceNotAvailableTimeComponent.Description">
+            <summary>
+            The reason that can be presented to the user as to why this time is not available
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceNotAvailableTimeComponent.StartDateElement">
+            <summary>
+            Service is not available (seasonally or for a public holiday) from this date
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceNotAvailableTimeComponent.StartDate">
+            <summary>
+            Service is not available (seasonally or for a public holiday) from this date
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceNotAvailableTimeComponent.EndDateElement">
+            <summary>
+            Service is not available (seasonally or for a public holiday) until this date
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.HealthcareService.HealthcareServiceNotAvailableTimeComponent.EndDate">
+            <summary>
+            Service is not available (seasonally or for a public holiday) until this date
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
         <member name="P:Hl7.Fhir.Model.ModelInfo.SearchParamDefinition.CompositeParams">
             <summary>
             If this search parameter is a Composite, this array contains 
@@ -354,26 +1558,6 @@
         <member name="T:Hl7.Fhir.Model.Address">
             <summary>
             A postal address
-            </summary>
-        </member>
-        <member name="T:Hl7.Fhir.Model.Element">
-            <summary>
-            Basetype for all composite-typed elements
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Element.Extension">
-            <summary>
-            Additional Content defined by implementations
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Element.ModifierExtension">
-            <summary>
-            Extensions that cannot be ignored
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Element.Id">
-            <summary>
-            Local id for element
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Address.UseElement">
@@ -959,6 +2143,221 @@
             An identifier that was assigned in secondary use - it serves to identify the object in a relative context, but cannot be consistently assigned to the same object again in a different context.
             </summary>
         </member>
+        <member name="T:Hl7.Fhir.Model.Namespace">
+            <summary>
+            System of unique identification
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.TypeElement">
+            <summary>
+            codesystem | identifier | root
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Type">
+            <summary>
+            codesystem | identifier | root
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NameElement">
+            <summary>
+            Human-readable label
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Name">
+            <summary>
+            Human-readable label
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.StatusElement">
+            <summary>
+            proposed | active | retired
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Status">
+            <summary>
+            proposed | active | retired
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.CountryElement">
+            <summary>
+            ISO 3-char country code
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Country">
+            <summary>
+            ISO 3-char country code
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Category">
+            <summary>
+            driver | provider | patient | bank
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.ResponsibleElement">
+            <summary>
+            Who maintains system namespace?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Responsible">
+            <summary>
+            Who maintains system namespace?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.DescriptionElement">
+            <summary>
+            What does namespace identify?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Description">
+            <summary>
+            What does namespace identify?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.UsageElement">
+            <summary>
+            How/where is it used
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Usage">
+            <summary>
+            How/where is it used
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.UniqueId">
+            <summary>
+            Unique identifiers used for system
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.Contact">
+            <summary>
+            Who should be contacted for questions about namespace
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.ReplacedBy">
+            <summary>
+            Use this instead
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Namespace.NamespaceStatus">
+            <summary>
+            Indicates whether the namespace should be used
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceStatus.Proposed">
+            <summary>
+            System has been submitted but not yet approved.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceStatus.Active">
+            <summary>
+            System is valid for use.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceStatus.Retired">
+            <summary>
+            System should no longer be used.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Namespace.NamespaceType">
+            <summary>
+            Identifies the purpose of the namespace
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceType.Codesystem">
+            <summary>
+            The namespace is used to define concepts and symbols to represent those concepts.  E.g. UCUM, LOINC, NDC code, local lab codes, etc.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceType.Identifier">
+            <summary>
+            The namespace is used to manage identifiers (e.g. license numbers, order numbers, etc.).
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceType.Root">
+            <summary>
+            The namespace is used as the root for other identifiers and namespaces.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Namespace.NamespaceIdentifierType">
+            <summary>
+            Identifies the style of unique identifier used to identify a namepace
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceIdentifierType.Oid">
+            <summary>
+            An ISO object identifier.  E.g. 1.2.3.4.5.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceIdentifierType.Uuid">
+            <summary>
+            A universally unique identifier of the form a5afddf4-e880-459b-876e-e4591b0acc11.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceIdentifierType.Uri">
+            <summary>
+            A uniform resource identifier (ideally a URL - uniform resource locator).  E.g. http://unitsofmeasure.org.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Namespace.NamespaceIdentifierType.Other">
+            <summary>
+            Some other type of unique identifier.  E.g HL7-assigned reserved string such as LN for LOINC.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceContactComponent.Name">
+            <summary>
+            Name of person
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceContactComponent.Telecom">
+            <summary>
+            Phone, email, etc.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.TypeElement">
+            <summary>
+            oid | uuid | uri | other
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.Type">
+            <summary>
+            oid | uuid | uri | other
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.ValueElement">
+            <summary>
+            The unique identifier
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.Value">
+            <summary>
+            The unique identifier
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.PreferredElement">
+            <summary>
+            Is this the id that should be used for this type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.Preferred">
+            <summary>
+            Is this the id that should be used for this type
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Namespace.NamespaceUniqueIdComponent.Period">
+            <summary>
+            When is identifier valid?
+            </summary>
+        </member>
         <member name="T:Hl7.Fhir.Model.Narrative">
             <summary>
             A human-readable formatted text, including images
@@ -1003,6 +2402,280 @@
         <member name="F:Hl7.Fhir.Model.Narrative.NarrativeStatus.Empty">
             <summary>
             the contents of the narrative are some equivalent of "No human-readable text provided for this resource".
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.OperationDefinition">
+            <summary>
+            Definition of an operation or a named query
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.IdentifierElement">
+            <summary>
+            Logical id to reference this operation definition
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Identifier">
+            <summary>
+            Logical id to reference this operation definition
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.VersionElement">
+            <summary>
+            Logical id for this version of the operation definition
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Version">
+            <summary>
+            Logical id for this version of the operation definition
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.TitleElement">
+            <summary>
+            Informal name for this profile
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Title">
+            <summary>
+            Informal name for this profile
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.PublisherElement">
+            <summary>
+            Name of the publisher (Organization or individual)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Publisher">
+            <summary>
+            Name of the publisher (Organization or individual)
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Telecom">
+            <summary>
+            Contact information of the publisher
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.DescriptionElement">
+            <summary>
+            Natural language description of the operation
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Description">
+            <summary>
+            Natural language description of the operation
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Code">
+            <summary>
+            Assist with indexing and finding
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.StatusElement">
+            <summary>
+            draft | active | retired
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Status">
+            <summary>
+            draft | active | retired
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.ExperimentalElement">
+            <summary>
+            If for testing purposes, not real usage
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Experimental">
+            <summary>
+            If for testing purposes, not real usage
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.DateElement">
+            <summary>
+            Date for this version of the operation definition
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Date">
+            <summary>
+            Date for this version of the operation definition
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.KindElement">
+            <summary>
+            operation | query
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Kind">
+            <summary>
+            operation | query
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.NameElement">
+            <summary>
+            Name used to invoke the operation
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Name">
+            <summary>
+            Name used to invoke the operation
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.NotesElement">
+            <summary>
+            Additional information about use
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Notes">
+            <summary>
+            Additional information about use
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Base">
+            <summary>
+            Marks this as a profile of the base
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.SystemElement">
+            <summary>
+            Invoke at the system level?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.System">
+            <summary>
+            Invoke at the system level?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.TypeElement">
+            <summary>
+            Invoke at resource level for these type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Type">
+            <summary>
+            Invoke at resource level for these type
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.InstanceElement">
+            <summary>
+            Invoke on an instance?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Instance">
+            <summary>
+            Invoke on an instance?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.Parameter">
+            <summary>
+            Parameters for the operation/query
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.OperationDefinition.OperationParameterUse">
+            <summary>
+            Whether an operation parameter is an input or an output parameter
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.OperationDefinition.OperationParameterUse.In">
+            <summary>
+            This is an input parameter.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.OperationDefinition.OperationParameterUse.Out">
+            <summary>
+            This is an output parameter.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.OperationDefinition.OperationKind">
+            <summary>
+            Whether an operation is a normal operation or a query
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.OperationDefinition.OperationKind.Operation">
+            <summary>
+            This operation is invoked as an operation.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.OperationDefinition.OperationKind.Query">
+            <summary>
+            This operation is a named query, invoked using the search mechanism.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.NameElement">
+            <summary>
+            Name of the parameter
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Name">
+            <summary>
+            Name of the parameter
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.UseElement">
+            <summary>
+            in | out
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Use">
+            <summary>
+            in | out
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.MinElement">
+            <summary>
+            Minimum Cardinality
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Min">
+            <summary>
+            Minimum Cardinality
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.MaxElement">
+            <summary>
+            Maximum Cardinality (a number or *)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Max">
+            <summary>
+            Maximum Cardinality (a number or *)
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.DocumentationElement">
+            <summary>
+            Description of meaning/use
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Documentation">
+            <summary>
+            Description of meaning/use
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Type">
+            <summary>
+            What type this parameter hs
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.OperationDefinition.OperationDefinitionParameterComponent.Profile">
+            <summary>
+            Profile on the type
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.Period">
@@ -1117,6 +2790,173 @@
             The actual value is greater than the given value.
             </summary>
         </member>
+        <member name="T:Hl7.Fhir.Model.QuestionnaireAnswers">
+            <summary>
+            A structured set of questions and their answers
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Identifier">
+            <summary>
+            Unique id for this set of answers
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Questionnaire">
+            <summary>
+            Form being answered
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.StatusElement">
+            <summary>
+            in progress | completed | amended
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Status">
+            <summary>
+            in progress | completed | amended
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Subject">
+            <summary>
+            The subject of the questions
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Author">
+            <summary>
+            Person who received and recorded the answers
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.AuthoredElement">
+            <summary>
+            Date this version was authored
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Authored">
+            <summary>
+            Date this version was authored
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Source">
+            <summary>
+            The person who answered the questions
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Encounter">
+            <summary>
+            Primary encounter during which the answers were collected
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.Group">
+            <summary>
+            Grouped questions
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionnaireAnswersStatus">
+            <summary>
+            Lifecycle status of the questionnaire answers
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionnaireAnswersStatus.InProgress">
+            <summary>
+            This QuestionnaireAnswers has been partially filled out with answers, but changes or additions are still expected to be made to it.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionnaireAnswersStatus.Completed">
+            <summary>
+            This QuestionnaireAnswers has been filled out with answers, and the current content is regarded as definitive.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionnaireAnswersStatus.Amended">
+            <summary>
+            This QuestionnaireAnswers has been filled out with answers, then marked as complete, yet changes or additions have been made to it afterwards.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionAnswerComponent.Value">
+            <summary>
+            Single-valued answer to the question
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionComponent.LinkIdElement">
+            <summary>
+            Corresponding question within Questionnaire
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionComponent.LinkId">
+            <summary>
+            Corresponding question within Questionnaire
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionComponent.TextElement">
+            <summary>
+            Text of the question as it is shown to the user
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionComponent.Text">
+            <summary>
+            Text of the question as it is shown to the user
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionComponent.Answer">
+            <summary>
+            The response(s) to the question
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.QuestionComponent.Group">
+            <summary>
+            Nested questionnaire group
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.LinkIdElement">
+            <summary>
+            Corresponding group within Questionnaire
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.LinkId">
+            <summary>
+            Corresponding group within Questionnaire
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.TitleElement">
+            <summary>
+            Name for this group
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.Title">
+            <summary>
+            Name for this group
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.TextElement">
+            <summary>
+            Additional text for the group
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.Text">
+            <summary>
+            Additional text for the group
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.Subject">
+            <summary>
+            The subject this group's answers are about
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.Group">
+            <summary>
+            Nested questionnaire answers group
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.QuestionnaireAnswers.GroupComponent.Question">
+            <summary>
+            Questions in this group
+            </summary>
+        </member>
         <member name="T:Hl7.Fhir.Model.Range">
             <summary>
             Set of values bounded by low and high
@@ -1145,6 +2985,139 @@
         <member name="P:Hl7.Fhir.Model.Ratio.Denominator">
             <summary>
             Denominator value
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.ReferralRequest">
+            <summary>
+            A request for referral or tranfer of care
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.StatusElement">
+            <summary>
+            draft | sent | active | cancelled | refused | completed
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Status">
+            <summary>
+            draft | sent | active | cancelled | refused | completed
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Identifier">
+            <summary>
+            Identifier of request
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Type">
+            <summary>
+            Referral/Transition of care request type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Specialty">
+            <summary>
+            The clinical specialty (discipline) that the referral is requested for
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Priority">
+            <summary>
+            Urgency of referral / transfer of care request
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Subject">
+            <summary>
+            Patient/subject of referral or care transfer request
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Requester">
+            <summary>
+            Requester of referral / transfer of care
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Recipient">
+            <summary>
+            Receiver of referral / transfer of care request
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Encounter">
+            <summary>
+            Encounter
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.DateSentElement">
+            <summary>
+            Date referral/transfer of care request is sent
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.DateSent">
+            <summary>
+            Date referral/transfer of care request is sent
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Reason">
+            <summary>
+            Reason for referral / Transfer of care request
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.DescriptionElement">
+            <summary>
+            A textual description of the referral
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.Description">
+            <summary>
+            A textual description of the referral
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.ServiceRequested">
+            <summary>
+            Service(s) requested
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.SupportingInformation">
+            <summary>
+            Additonal information to support referral or transfer of care request
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ReferralRequest.FulfillmentTime">
+            <summary>
+            Requested service(s) fulfillment time
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.ReferralRequest.ReferralStatus">
+            <summary>
+            The status of the referral
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ReferralRequest.ReferralStatus.Draft">
+            <summary>
+            A draft referral that has yet to be send.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ReferralRequest.ReferralStatus.Sent">
+            <summary>
+            The referral has been transmitted, but not yet acknowledged by the recipient.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ReferralRequest.ReferralStatus.Active">
+            <summary>
+            The referral has been acknowledged by the recipient, and is in the process of being actioned.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ReferralRequest.ReferralStatus.Cancelled">
+            <summary>
+            The referral has been cancelled without being completed. For example it is no longer needed.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ReferralRequest.ReferralStatus.Refused">
+            <summary>
+            The recipient has declined to accept the referral.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.ReferralRequest.ReferralStatus.Completed">
+            <summary>
+            The referral has been completely actioned.
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.ResourceReference">
@@ -1178,6 +3151,105 @@
             <summary>
             Determines whether the ResourceReference is a reference to a contained resource (i.e. the reference value starts with an Url anchor ('#'))
             </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.RiskAssessment">
+            <summary>
+            Potential outcomes for a subject with likelihood
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Subject">
+            <summary>
+            Who/what does assessment apply to?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.DateElement">
+            <summary>
+            When was assessment made?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Date">
+            <summary>
+            When was assessment made?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Condition">
+            <summary>
+            Condition assessed
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Performer">
+            <summary>
+            Who did assessment?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Identifier">
+            <summary>
+            Unique identifier for the assessment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Method">
+            <summary>
+            Evaluation mechanism
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Basis">
+            <summary>
+            Information used in assessment
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Prediction">
+            <summary>
+            Outcome predicted
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.MitigationElement">
+            <summary>
+            How to reduce risk
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.Mitigation">
+            <summary>
+            How to reduce risk
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.Outcome">
+            <summary>
+            Possible outcome for the subject
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.Probability">
+            <summary>
+            Likelihood of specified outcome
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.RelativeRiskElement">
+            <summary>
+            Relative likelihood
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.RelativeRisk">
+            <summary>
+            Relative likelihood
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.When">
+            <summary>
+            Timeframe or age range
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.RationaleElement">
+            <summary>
+            Explanation of prediction
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.RiskAssessment.RiskAssessmentPredictionComponent.Rationale">
+            <summary>
+            Explanation of prediction
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="T:Hl7.Fhir.Model.SampledData">
             <summary>
@@ -1561,6 +3633,334 @@
             Primitive value of the element
             </summary>
         </member>
+        <member name="T:Hl7.Fhir.Model.Slot">
+            <summary>
+            (informative) A slot of time on a schedule that may be available for booking appointments
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.Identifier">
+            <summary>
+            External Ids for this item
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.Type">
+            <summary>
+            The type of appointments that can be booked into this slot (ideally this would be an identifiable service - which is at a location, rather than the location itself). If provided then this overrides the value provided on the availability resource
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.Availability">
+            <summary>
+            The availability resource that this slot defines an interval of status information
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.FreeBusyTypeElement">
+            <summary>
+            BUSY | FREE | BUSY-UNAVAILABLE | BUSY-TENTATIVE
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.FreeBusyType">
+            <summary>
+            BUSY | FREE | BUSY-UNAVAILABLE | BUSY-TENTATIVE
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.StartElement">
+            <summary>
+            Date/Time that the slot is to begin
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.Start">
+            <summary>
+            Date/Time that the slot is to begin
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.EndElement">
+            <summary>
+            Date/Time that the slot is to conclude
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.End">
+            <summary>
+            Date/Time that the slot is to conclude
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.OverbookedElement">
+            <summary>
+            This slot has already been overbooked, appointments are unlikely to be accepted for this time
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.Overbooked">
+            <summary>
+            This slot has already been overbooked, appointments are unlikely to be accepted for this time
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.CommentElement">
+            <summary>
+            Comments on the slot to describe any extended information. Such as custom constraints on the slot
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.Comment">
+            <summary>
+            Comments on the slot to describe any extended information. Such as custom constraints on the slot
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.LastModifiedElement">
+            <summary>
+            When this slot was created, or last revised
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Slot.LastModified">
+            <summary>
+            When this slot was created, or last revised
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Slot.SlotStatus">
+            <summary>
+            The free/busy status of an appointment
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Slot.SlotStatus.BUSY">
+            <summary>
+            Indicates that the time interval is busy because one  or more events have been scheduled for that interval.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Slot.SlotStatus.FREE">
+            <summary>
+            Indicates that the time interval is free for scheduling.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Slot.SlotStatus.BUSYUNAVAILABLE">
+            <summary>
+            Indicates that the time interval is busy and that the interval can not be scheduled.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Slot.SlotStatus.BUSYTENTATIVE">
+            <summary>
+            Indicates that the time interval is busy because one or more events have been tentatively scheduled for that interval.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Subscription">
+            <summary>
+            A server push subscription criteria
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.CriteriaElement">
+            <summary>
+            Rule for server push criteria
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Criteria">
+            <summary>
+            Rule for server push criteria
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Contact">
+            <summary>
+            Contact details for source (e.g. troubleshooting)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.ReasonElement">
+            <summary>
+            Description of why this subscription was created
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Reason">
+            <summary>
+            Description of why this subscription was created
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.StatusElement">
+            <summary>
+            requested | active | error | off
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Status">
+            <summary>
+            requested | active | error | off
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.ErrorElement">
+            <summary>
+            Latest error note
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Error">
+            <summary>
+            Latest error note
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Channel">
+            <summary>
+            The channel on which to report matches to the criteria
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.EndElement">
+            <summary>
+            When to automatically delete the subscription
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.End">
+            <summary>
+            When to automatically delete the subscription
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.Tag">
+            <summary>
+            A tag to add to matching resources
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Subscription.SubscriptionStatus">
+            <summary>
+            The status of a subscription
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionStatus.Requested">
+            <summary>
+            The client has requested the subscription, and the server has not yet set it up.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionStatus.Active">
+            <summary>
+            The subscription is active.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionStatus.Error">
+            <summary>
+            The server has an error executing the notification.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionStatus.Off">
+            <summary>
+            Too many errors have occurred or the subscription has expired.
+            </summary>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Subscription.SubscriptionChannelType">
+            <summary>
+            The type of method used to execute a subscription
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionChannelType.RestHook">
+            <summary>
+            The channel is executed by making a post to the URI. If a payload is included, the URL is interpreted as the service base, and an update (PUT) is made.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionChannelType.Websocket">
+            <summary>
+            The channel is executed by sending a packet across a web socket connection maintained by the client. The URL identifies the websocket, and the client binds to this URL.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionChannelType.Email">
+            <summary>
+            The channel is executed by sending an email to the email addressed in the URI (which must be a mailto:).
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionChannelType.Sms">
+            <summary>
+            The channel is executed by sending an SMS message to the phone number identified in the URL (tel:).
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Subscription.SubscriptionChannelType.Message">
+            <summary>
+            The channel Is executed by sending a message (e.g. a Bundle with a MessageHeader resource etc) to the application identified in the URI.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.TypeElement">
+            <summary>
+            rest-hook | websocket | email | sms | message
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.Type">
+            <summary>
+            rest-hook | websocket | email | sms | message
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.UrlElement">
+            <summary>
+            Where the channel points to
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.Url">
+            <summary>
+            Where the channel points to
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.PayloadElement">
+            <summary>
+            Mimetype to send, or blank for no payload
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.Payload">
+            <summary>
+            Mimetype to send, or blank for no payload
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.HeaderElement">
+            <summary>
+            Usage depends on the channel type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionChannelComponent.Header">
+            <summary>
+            Usage depends on the channel type
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionTagComponent.TermElement">
+            <summary>
+            The term that identifies the tag
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionTagComponent.Term">
+            <summary>
+            The term that identifies the tag
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionTagComponent.SchemeElement">
+            <summary>
+            The scheme for the tag (kind of tag)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionTagComponent.Scheme">
+            <summary>
+            The scheme for the tag (kind of tag)
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionTagComponent.DescriptionElement">
+            <summary>
+            Tag description label
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Subscription.SubscriptionTagComponent.Description">
+            <summary>
+            Tag description label
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="T:Hl7.Fhir.Model.Time">
+            <summary>
+            Typed element containing the primitive time
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Time.Value">
+            <summary>
+            Primitive value of the element
+            </summary>
+        </member>
         <member name="T:Hl7.Fhir.Model.Uuid">
             <summary>
             Typed element containing the primitive uuid
@@ -1579,66 +3979,6 @@
         <member name="P:Hl7.Fhir.Model.XHtml.Value">
             <summary>
             Primitive value of the element
-            </summary>
-        </member>
-        <member name="M:Hl7.Fhir.Model.Resource.FindContainedResource(Hl7.Fhir.Model.ResourceReference)">
-            <summary>
-            Finds a Resource amongst this Resource's contained resources
-            </summary>
-            <param name="containedReference">A ResourceReference containing an anchored resource id.</param>
-            <returns>The found resource, or null if no matching contained resource was found. Will throw an exception if there's more than
-            one matching contained resource</returns>
-        </member>
-        <member name="M:Hl7.Fhir.Model.Resource.FindContainedResource(System.Uri)">
-            <summary>
-            Finds a Resource amongst this Resource's contained resources
-            </summary>
-            <param name="containedReference">A Uri containing an anchored resource id.</param>
-            <returns>The found resource, or null if no matching contained resource was found. Will throw an exception if there's more than
-            one matching contained resource</returns>
-        </member>
-        <member name="M:Hl7.Fhir.Model.Resource.FindContainedResource(System.String)">
-            <summary>
-            Finds a Resource amongst this Resource's contained resources
-            </summary>
-            <param name="containedReference">A string containing an anchored resource id.</param>
-            <returns>The found resource, or null if no matching contained resource was found. Will throw an exception if there's more than
-            one matching contained resource</returns>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.Extension">
-            <summary>
-            Additional Content defined by implementations
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.ModifierExtension">
-            <summary>
-            Extensions that cannot be ignored
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.LanguageElement">
-            <summary>
-            Language of the resource content
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.Language">
-            <summary>
-            Language of the resource content
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.Text">
-            <summary>
-            Text summary of the resource, for human interpretation
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.Contained">
-            <summary>
-            Contained, inline Resources
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Resource.Id">
-            <summary>
-            Local id for element
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.AdverseReaction">
@@ -2613,7 +4953,7 @@
         </member>
         <member name="T:Hl7.Fhir.Model.ConceptMap">
             <summary>
-            A statement of relationships from one set of concepts to one or more other concept systems
+            A statement of relationships from one set of concepts to one or more other concepts - either code systems or data elements, or classes in class models
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.ConceptMap.IdentifierElement">
@@ -2722,7 +5062,7 @@
         </member>
         <member name="P:Hl7.Fhir.Model.ConceptMap.Source">
             <summary>
-            Identifies the source value set which is being mapped
+            Identifies the source of the concepts which are being mapped
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.ConceptMap.Target">
@@ -2730,9 +5070,9 @@
             Provides context to the mappings
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.Concept">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.Element">
             <summary>
-            Mappings for a concept from the source valueset
+            Mappings for a concept from the source set
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.ConceptMap.ConceptMapEquivalence">
@@ -2785,119 +5125,119 @@
             This is an explicit assertion that there is no mapping between the source and target concept.
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.SystemElement">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementComponent.CodeSystemElement">
             <summary>
-            System of the target
+            Code System (if value set crosses code systems)
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.System">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementComponent.CodeSystem">
             <summary>
-            System of the target
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.CodeElement">
-            <summary>
-            Code that identifies the target concept
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.Code">
-            <summary>
-            Code that identifies the target concept
+            Code System (if value set crosses code systems)
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.EquivalenceElement">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementComponent.CodeElement">
+            <summary>
+            Identifies element being mapped
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementComponent.Code">
+            <summary>
+            Identifies element being mapped
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementComponent.DependsOn">
+            <summary>
+            Other elements required for this mapping (from context)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementComponent.Map">
+            <summary>
+            A concept from the target value set that this concept maps to
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.CodeSystemElement">
+            <summary>
+            System of the target (if necessary)
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.CodeSystem">
+            <summary>
+            System of the target (if necessary)
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.CodeElement">
+            <summary>
+            Code that identifies the target element
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.Code">
+            <summary>
+            Code that identifies the target element
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.EquivalenceElement">
             <summary>
             equal | equivalent | wider | subsumes | narrower | specialises | inexact | unmatched | disjoint
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.Equivalence">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.Equivalence">
             <summary>
             equal | equivalent | wider | subsumes | narrower | specialises | inexact | unmatched | disjoint
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.CommentsElement">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.CommentsElement">
             <summary>
             Description of status/issues in mapping
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.Comments">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.Comments">
             <summary>
             Description of status/issues in mapping
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptMapComponent.Product">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapElementMapComponent.Product">
             <summary>
             Other concepts that this mapping also produces
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherConceptComponent.ConceptElement">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherElementComponent.ElementElement">
             <summary>
-            Reference to element/field/valueset provides the context
+            Reference to element/field/valueset mapping depends on
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherConceptComponent.Concept">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherElementComponent.Element">
             <summary>
-            Reference to element/field/valueset provides the context
+            Reference to element/field/valueset mapping depends on
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherConceptComponent.SystemElement">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherElementComponent.CodeSystemElement">
             <summary>
-            System for a concept in the referenced concept
+            Code System (if necessary)
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherConceptComponent.System">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherElementComponent.CodeSystem">
             <summary>
-            System for a concept in the referenced concept
+            Code System (if necessary)
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherConceptComponent.CodeElement">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherElementComponent.CodeElement">
             <summary>
-            Code for a concept in the referenced concept
+            Value of the referenced element
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherConceptComponent.Code">
+        <member name="P:Hl7.Fhir.Model.ConceptMap.OtherElementComponent.Code">
             <summary>
-            Code for a concept in the referenced concept
+            Value of the referenced element
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptComponent.SystemElement">
-            <summary>
-            System that defines the concept being mapped
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptComponent.System">
-            <summary>
-            System that defines the concept being mapped
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptComponent.CodeElement">
-            <summary>
-            Identifies concept being mapped
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptComponent.Code">
-            <summary>
-            Identifies concept being mapped
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptComponent.DependsOn">
-            <summary>
-            Other concepts required for this mapping (from context)
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.ConceptMap.ConceptMapConceptComponent.Map">
-            <summary>
-            A concept from the target value set that this concept maps to
-            </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.Condition">
             <summary>
@@ -3265,6 +5605,11 @@
             Document definition
             </summary>
         </member>
+        <member name="T:Hl7.Fhir.Model.Conformance.SystemRestfulInteraction">
+            <summary>
+            Operations supported by REST at the system level
+            </summary>
+        </member>
         <member name="T:Hl7.Fhir.Model.Conformance.DocumentMode">
             <summary>
             Whether the application produces or consumes documents
@@ -3315,6 +5660,11 @@
             The application sends or receivers messages using HL7's Minimal Lower Level Protocol.
             </summary>
         </member>
+        <member name="T:Hl7.Fhir.Model.Conformance.TypeRestfulInteraction">
+            <summary>
+            Operations supported by REST at the type or instance level
+            </summary>
+        </member>
         <member name="T:Hl7.Fhir.Model.Conformance.ConformanceEventMode">
             <summary>
             The mode of a message conformance statement
@@ -3350,11 +5700,6 @@
             The content is not necessarily intended to be current, and it can be reprocessed, though there may be version issues created by processing old notifications.
             </summary>
         </member>
-        <member name="T:Hl7.Fhir.Model.Conformance.RestfulOperationType">
-            <summary>
-            Operations supported by REST at the type or instance level
-            </summary>
-        </member>
         <member name="T:Hl7.Fhir.Model.Conformance.ConformanceStatementStatus">
             <summary>
             The status of this conformance statement
@@ -3373,11 +5718,6 @@
         <member name="F:Hl7.Fhir.Model.Conformance.ConformanceStatementStatus.Retired">
             <summary>
             This conformance statement has been withdrawn or superceded and should no longer be used.
-            </summary>
-        </member>
-        <member name="T:Hl7.Fhir.Model.Conformance.RestfulOperationSystem">
-            <summary>
-            Operations supported by REST at the system level
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.Conformance.SearchParamType">
@@ -3450,44 +5790,6 @@
             see http://www.ietf.org/rfc/rfc4120.txt.
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.NameElement">
-            <summary>
-            Special named queries (_query=)
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.Name">
-            <summary>
-            Special named queries (_query=)
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.DefinitionElement">
-            <summary>
-            Where query is defined
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.Definition">
-            <summary>
-            Where query is defined
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.DocumentationElement">
-            <summary>
-            Additional usage guidance
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.Documentation">
-            <summary>
-            Additional usage guidance
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestQueryComponent.Parameter">
-            <summary>
-            Parameter for the named query
-            </summary>
-        </member>
         <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestComponent.ModeElement">
             <summary>
             client | server
@@ -3520,14 +5822,14 @@
             Resource served on the REST interface
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestComponent.Operation">
+        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestComponent.Interaction">
             <summary>
             What operations are supported?
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestComponent.Query">
+        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestComponent.Operation">
             <summary>
-            Definition of a named query
+            Definition of an operation or a custom query
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestComponent.DocumentMailboxElement">
@@ -3655,7 +5957,7 @@
             What structural features are supported
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceComponent.Operation">
+        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceComponent.Interaction">
             <summary>
             What operations are supported?
             </summary>
@@ -3717,28 +6019,6 @@
         <member name="P:Hl7.Fhir.Model.Conformance.ConformanceImplementationComponent.Url">
             <summary>
             Base URL for the installation
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceOperationComponent.CodeElement">
-            <summary>
-            read | vread | update | delete | history-instance | validate | history-type | create | search-type
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceOperationComponent.Code">
-            <summary>
-            read | vread | update | delete | history-instance | validate | history-type | create | search-type
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceOperationComponent.DocumentationElement">
-            <summary>
-            Anything special about operation behavior
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceOperationComponent.Documentation">
-            <summary>
-            Anything special about operation behavior
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
@@ -3806,6 +6086,50 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.SystemInteractionComponent.CodeElement">
+            <summary>
+            transaction | search-system | history-system
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.SystemInteractionComponent.Code">
+            <summary>
+            transaction | search-system | history-system
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.SystemInteractionComponent.DocumentationElement">
+            <summary>
+            Anything special about operation behavior
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.SystemInteractionComponent.Documentation">
+            <summary>
+            Anything special about operation behavior
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.ResourceInteractionComponent.CodeElement">
+            <summary>
+            read | vread | update | delete | history-instance | validate | history-type | create | search-type
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.ResourceInteractionComponent.Code">
+            <summary>
+            read | vread | update | delete | history-instance | validate | history-type | create | search-type
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.ResourceInteractionComponent.DocumentationElement">
+            <summary>
+            Anything special about operation behavior
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Conformance.ResourceInteractionComponent.Documentation">
+            <summary>
+            Anything special about operation behavior
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
         <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestSecurityComponent.CorsElement">
             <summary>
             Adds CORS Headers (http://enable-cors.org/)
@@ -3860,27 +6184,21 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.CodeElement">
+        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.NameElement">
             <summary>
-            transaction | search-system | history-system
+            Name by which the operation/query is invoked
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.Code">
+        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.Name">
             <summary>
-            transaction | search-system | history-system
+            Name by which the operation/query is invoked
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.DocumentationElement">
+        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.Definition">
             <summary>
-            Anything special about operation behavior
+            The the operation/query is defined
             </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestOperationComponent.Documentation">
-            <summary>
-            Anything special about operation behavior
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Conformance.ConformanceRestResourceSearchParamComponent.NameElement">
             <summary>
@@ -4156,6 +6474,11 @@
             Explanation/Justification for test
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.DiagnosticOrder.SupportingInformation">
+            <summary>
+            Supporting observations or conditions for this request
+            </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.DiagnosticOrder.Specimen">
             <summary>
@@ -4947,6 +7270,11 @@
             List of participants involved in the encounter
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.Encounter.Fulfills">
+            <summary>
+            The appointment that scheduled this encounter
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.Encounter.Period">
             <summary>
             The start and end time of the encounter
@@ -5178,6 +7506,17 @@
             Patient history is about
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.FamilyHistory.DateElement">
+            <summary>
+            When history was captured/updated
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.FamilyHistory.Date">
+            <summary>
+            When history was captured/updated
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
         <member name="P:Hl7.Fhir.Model.FamilyHistory.NoteElement">
             <summary>
             Additional details not covered elsewhere
@@ -5239,6 +7578,11 @@
         <member name="P:Hl7.Fhir.Model.FamilyHistory.FamilyHistoryRelationComponent.Born">
             <summary>
             (approximate) date of birth
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.FamilyHistory.FamilyHistoryRelationComponent.Age">
+            <summary>
+            (approximate) age
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.FamilyHistory.FamilyHistoryRelationComponent.Deceased">
@@ -7554,6 +9898,11 @@
             Who did the observation
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.Observation.Encounter">
+            <summary>
+            Healthcare event related to the observation
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.Observation.ReferenceRange">
             <summary>
             Provides guide for interpretation
@@ -7698,6 +10047,17 @@
             <summary>
             Applicable age range, if relevant
             </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Observation.ObservationReferenceRangeComponent.TextElement">
+            <summary>
+            Text based reference range in an observation
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Observation.ObservationReferenceRangeComponent.Text">
+            <summary>
+            Text based reference range in an observation
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Observation.ObservationRelatedComponent.TypeElement">
             <summary>
@@ -8184,10 +10544,16 @@
             Visiting or postal addresses for the contact
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.Organization.OrganizationContactComponent.GenderElement">
+            <summary>
+            male | female | other | unknown
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.Organization.OrganizationContactComponent.Gender">
             <summary>
-            Gender for administrative purposes
+            male | female | other | unknown
             </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="T:Hl7.Fhir.Model.Other">
             <summary>
@@ -8245,10 +10611,16 @@
             A contact detail for the individual
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.Patient.GenderElement">
+            <summary>
+            male | female | other | unknown
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.Patient.Gender">
             <summary>
-            Gender for administrative purposes
+            male | female | other | unknown
             </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Patient.BirthDateElement">
             <summary>
@@ -8367,14 +10739,25 @@
             Address for the contact person
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.Patient.ContactComponent.GenderElement">
+            <summary>
+            male | female | other | unknown
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.Patient.ContactComponent.Gender">
             <summary>
-            Gender for administrative purposes
+            male | female | other | unknown
             </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Patient.ContactComponent.Organization">
             <summary>
             Organization that is associated with the contact
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Patient.ContactComponent.Period">
+            <summary>
+            The date range that this contact applies
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Patient.AnimalComponent.Species">
@@ -8433,10 +10816,16 @@
             Where practitioner can be found/visited
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.Practitioner.GenderElement">
+            <summary>
+            male | female | other | unknown
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.Practitioner.Gender">
             <summary>
-            Gender for administrative purposes
+            male | female | other | unknown
             </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Practitioner.BirthDateElement">
             <summary>
@@ -8487,6 +10876,11 @@
         <member name="P:Hl7.Fhir.Model.Practitioner.Communication">
             <summary>
             A language the practitioner is able to use in patient communication
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Practitioner.PractitionerQualificationComponent.Identifier">
+            <summary>
+            An identifier for this qualification for the practitioner
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Practitioner.PractitionerQualificationComponent.Code">
@@ -8643,16 +11037,21 @@
             Resource Profile
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Profile.IdentifierElement">
+        <member name="P:Hl7.Fhir.Model.Profile.UrlElement">
             <summary>
-            Logical id to reference this profile
+            Literal URL used to reference this profile
             </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Profile.Url">
+            <summary>
+            Literal URL used to reference this profile
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Profile.Identifier">
             <summary>
-            Logical id to reference this profile
+            Other identifiers for the profile
             </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Profile.VersionElement">
             <summary>
@@ -8776,11 +11175,6 @@
         <member name="P:Hl7.Fhir.Model.Profile.ExtensionDefn">
             <summary>
             Definition of an extension
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Profile.Query">
-            <summary>
-            Definition of a named query
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.Profile.BindingConformance">
@@ -9119,6 +11513,17 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
+        <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.BaseElement">
+            <summary>
+            Structure that this set of constraints applies to
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.Base">
+            <summary>
+            Structure that this set of constraints applies to
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
         <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.NameElement">
             <summary>
             Name for this particular structure (reference target)
@@ -9152,9 +11557,14 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.Element">
+        <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.Snapshot">
             <summary>
-            Definition of elements in the resource (if no profile)
+            Snapshot view of the structure
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.Differential">
+            <summary>
+            Differential view of the structure
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Profile.ProfileStructureComponent.SearchParam">
@@ -9217,31 +11627,9 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileQueryComponent.NameElement">
+        <member name="P:Hl7.Fhir.Model.Profile.ConstraintComponent.Element">
             <summary>
-            Special named queries (_query=)
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileQueryComponent.Name">
-            <summary>
-            Special named queries (_query=)
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileQueryComponent.DocumentationElement">
-            <summary>
-            Describes the named query
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileQueryComponent.Documentation">
-            <summary>
-            Describes the named query
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileQueryComponent.Parameter">
-            <summary>
-            Parameter for the named query
+            Definition of elements in the resource (if no profile)
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Profile.TypeRefComponent.CodeElement">
@@ -9534,9 +11922,9 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Profile.ProfileExtensionDefnComponent.Definition">
+        <member name="P:Hl7.Fhir.Model.Profile.ProfileExtensionDefnComponent.Element">
             <summary>
-            Definition of the extension and its content
+            Definition of the elements in the extension
             </summary>
         </member>
         <member name="T:Hl7.Fhir.Model.Provenance">
@@ -9948,49 +12336,7 @@
         </member>
         <member name="T:Hl7.Fhir.Model.Questionnaire">
             <summary>
-            A structured set of questions and their answers
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.StatusElement">
-            <summary>
-            draft | published | retired | in progress | completed | amended
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Status">
-            <summary>
-            draft | published | retired | in progress | completed | amended
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.AuthoredElement">
-            <summary>
-            Date this version was authored
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Authored">
-            <summary>
-            Date this version was authored
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Subject">
-            <summary>
-            The subject of the questions
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Author">
-            <summary>
-            Person who received and recorded the answers
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Source">
-            <summary>
-            The person who answered the questions
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Name">
-            <summary>
-            Name/code for a predefined list of questions
+            A structured set of questions
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.Identifier">
@@ -9998,10 +12344,49 @@
             External Ids for this questionnaire
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.Encounter">
+        <member name="P:Hl7.Fhir.Model.Questionnaire.VersionElement">
             <summary>
-            Primary encounter during which the answers were collected
+            Logical id for this version of Questionnaire
             </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.Version">
+            <summary>
+            Logical id for this version of Questionnaire
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.StatusElement">
+            <summary>
+            draft | published | retired
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.Status">
+            <summary>
+            draft | published | retired
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.DateElement">
+            <summary>
+            Date this version was authored
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.Date">
+            <summary>
+            Date this version was authored
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.PublisherElement">
+            <summary>
+            Organization who designed the questionnaire
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.Publisher">
+            <summary>
+            Organization who designed the questionnaire
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.Group">
             <summary>
@@ -10015,37 +12400,108 @@
         </member>
         <member name="F:Hl7.Fhir.Model.Questionnaire.QuestionnaireStatus.Draft">
             <summary>
-            This Questionnaire is used as a template but the template is not ready for use or publication.
+            This Questionnaire is not ready for official use.
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.Questionnaire.QuestionnaireStatus.Published">
             <summary>
-            This Questionnaire is used as a template, is published and ready for use.
+            This Questionnaire is ready for use.
             </summary>
         </member>
         <member name="F:Hl7.Fhir.Model.Questionnaire.QuestionnaireStatus.Retired">
             <summary>
-            This Questionnaire is used as a template but should no longer be used for new Questionnaires.
+            This Questionnaire should no longer be used to gather data.
             </summary>
         </member>
-        <member name="F:Hl7.Fhir.Model.Questionnaire.QuestionnaireStatus.InProgress">
+        <member name="T:Hl7.Fhir.Model.Questionnaire.AnswerFormat">
             <summary>
-            This Questionnaire has been filled out with answers, but changes or additions are still expected to be made to it.
+            The expected format of an answer
             </summary>
         </member>
-        <member name="F:Hl7.Fhir.Model.Questionnaire.QuestionnaireStatus.Completed">
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Boolean">
             <summary>
-            This Questionnaire has been filled out with answers, and the current content is regarded as definitive.
+            Answer is a yes/no answer.
             </summary>
         </member>
-        <member name="F:Hl7.Fhir.Model.Questionnaire.QuestionnaireStatus.Amended">
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Decimal">
             <summary>
-            This Questionnaire has been filled out with answers, then marked as complete, yet changes or additions have been made to it afterwards.
+            Answer is a floating point number.
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Name">
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Integer">
             <summary>
-            Code or name of the question
+            Answer is an integer.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Date">
+            <summary>
+            Answer is a date.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.DateTime">
+            <summary>
+            Answer is a date and time.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Instant">
+            <summary>
+            Answer is a system timestamp.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Time">
+            <summary>
+            Answer is a time independent of date.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.String">
+            <summary>
+            Answer is a short (few words to short sentence) free-text entry.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Text">
+            <summary>
+            Answer is a long (potentially multi-paragram) free-text entry.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Choice">
+            <summary>
+            Answer is a choice from a list of options.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.OpenChoice">
+            <summary>
+            Answer is a choice from a list of options or a free-text entry.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Attachment">
+            <summary>
+            Answer is binary content such as a image, PDF, etc.
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Reference">
+            <summary>
+            Answer is a reference to another resource (practitioner, organization, etc.).
+            </summary>
+        </member>
+        <member name="F:Hl7.Fhir.Model.Questionnaire.AnswerFormat.Quantity">
+            <summary>
+            Answer is a combination of a numeric value and unit.
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.LinkIdElement">
+            <summary>
+            To link questionnaire with questionnaire answers
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.LinkId">
+            <summary>
+            To link questionnaire with questionnaire answers
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Concept">
+            <summary>
+            Concept that represents this section on a questionnaire
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.TextElement">
@@ -10059,57 +12515,75 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Answer">
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.TypeElement">
             <summary>
-            Single-valued answer to the question
+            boolean | decimal | integer | date | dateTime +
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Choice">
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Type">
             <summary>
-            Selected options
+            boolean | decimal | integer | date | dateTime +
             </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.RequiredElement">
+            <summary>
+            Must group be included in data results?
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Required">
+            <summary>
+            Must group be included in data results?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.RepeatsElement">
+            <summary>
+            Whether the group may repeat
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Repeats">
+            <summary>
+            Whether the group may repeat
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Options">
             <summary>
             Valueset containing the possible options
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Data">
-            <summary>
-            Structured answer
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.RemarksElement">
-            <summary>
-            Remarks about the answer given
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Remarks">
-            <summary>
-            Remarks about the answer given
-            </summary>
-            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
-        </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.QuestionComponent.Group">
             <summary>
             Nested questionnaire group
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Name">
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.LinkIdElement">
             <summary>
-            Code or name of the section on a questionnaire
+            To link questionnaire with questionnaire answers
             </summary>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.HeaderElement">
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.LinkId">
             <summary>
-            Text that is displayed above the contents of the group
-            </summary>
-        </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Header">
-            <summary>
-            Text that is displayed above the contents of the group
+            To link questionnaire with questionnaire answers
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.TitleElement">
+            <summary>
+            Name to be displayed for group
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Title">
+            <summary>
+            Name to be displayed for group
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Concept">
+            <summary>
+            Concept that represents this section on a questionnaire
+            </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.TextElement">
             <summary>
@@ -10122,10 +12596,27 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
-        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Subject">
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.RequiredElement">
             <summary>
-            The subject this group's answers are about
+            Must group be included in data results?
             </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Required">
+            <summary>
+            Must group be included in data results?
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.RepeatsElement">
+            <summary>
+            Whether the group may repeat
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Repeats">
+            <summary>
+            Whether the group may repeat
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.Questionnaire.GroupComponent.Group">
             <summary>
@@ -10167,10 +12658,16 @@
             A contact detail for the person
             </summary>
         </member>
+        <member name="P:Hl7.Fhir.Model.RelatedPerson.GenderElement">
+            <summary>
+            male | female | other | unknown
+            </summary>
+        </member>
         <member name="P:Hl7.Fhir.Model.RelatedPerson.Gender">
             <summary>
-            Gender for administrative purposes
+            male | female | other | unknown
             </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
         <member name="P:Hl7.Fhir.Model.RelatedPerson.Address">
             <summary>
@@ -11224,6 +13721,28 @@
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
+        <member name="P:Hl7.Fhir.Model.ValueSet.PurposeElement">
+            <summary>
+            Textual description of the intended scope and use
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ValueSet.Purpose">
+            <summary>
+            Textual description of the intended scope and use
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ValueSet.ImmutableElement">
+            <summary>
+            Indicates whether or not any change to the content logical definition may occur
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ValueSet.Immutable">
+            <summary>
+            Indicates whether or not any change to the content logical definition may occur
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
         <member name="P:Hl7.Fhir.Model.ValueSet.PublisherElement">
             <summary>
             Name of the publisher (Organization or individual)
@@ -11253,12 +13772,12 @@
         </member>
         <member name="P:Hl7.Fhir.Model.ValueSet.CopyrightElement">
             <summary>
-            About the value set or its content
+            Publishing restrictions for the value set
             </summary>
         </member>
         <member name="P:Hl7.Fhir.Model.ValueSet.Copyright">
             <summary>
-            About the value set or its content
+            Publishing restrictions for the value set
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
@@ -11303,6 +13822,17 @@
         <member name="P:Hl7.Fhir.Model.ValueSet.Date">
             <summary>
             Date for given status
+            </summary>
+            <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ValueSet.StableDateElement">
+            <summary>
+            Fixed date for the version of all referenced code systems and value sets
+            </summary>
+        </member>
+        <member name="P:Hl7.Fhir.Model.ValueSet.StableDate">
+            <summary>
+            Fixed date for the version of all referenced code systems and value sets
             </summary>
             <remarks>This uses the native .NET datatype, rather than the FHIR equivalent</remarks>
         </member>
@@ -11637,7 +14167,7 @@
             Read-only property getting a summary from a Resource or a descriptive text in other cases.
             </summary>
         </member>
-        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.GetExtension(Hl7.Fhir.Model.IExtendable,System.Uri)">
+        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.GetExtension(Hl7.Fhir.Model.IExtendable,System.String)">
             <summary>
             Return the first extension with the given uri
             </summary>
@@ -11645,7 +14175,7 @@
             <param name="uri"></param>
             <returns>The first uri, or null if no extension with the given uri was found.</returns>
         </member>
-        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.GetExtensions(Hl7.Fhir.Model.IExtendable,System.Uri)">
+        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.GetExtensions(Hl7.Fhir.Model.IExtendable,System.String)">
             <summary>
             Find all extensions with the given uri.
             </summary>
@@ -11653,7 +14183,7 @@
             <param name="uri"></param>
             <returns>The list of extensions with a matching uri, or empty list if none were found.</returns>
         </member>
-        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.AddExtension(Hl7.Fhir.Model.IExtendable,System.Uri,Hl7.Fhir.Model.Element)">
+        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.AddExtension(Hl7.Fhir.Model.IExtendable,System.String,Hl7.Fhir.Model.Element)">
             <summary>
             Add an extension with the given uri and value.
             </summary>
@@ -11662,14 +14192,14 @@
             <param name="value"></param>
             <returns>The newly added Extension</returns>
         </member>
-        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.RemoveExtension(Hl7.Fhir.Model.IExtendable,System.Uri)">
+        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.RemoveExtension(Hl7.Fhir.Model.IExtendable,System.String)">
             <summary>
             Remove all extensions with the current uri, if any.
             </summary>
             <param name="extendable"></param>
             <param name="uri"></param>
         </member>
-        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.SetExtension(Hl7.Fhir.Model.IExtendable,System.Uri,Hl7.Fhir.Model.Element)">
+        <member name="M:Hl7.Fhir.Model.ExtensionExtensions.SetExtension(Hl7.Fhir.Model.IExtendable,System.String,Hl7.Fhir.Model.Element)">
             <summary>
             Add an extension with the given uri and value, removing any pre-existsing extensions
             with the same uri.

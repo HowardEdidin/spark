@@ -178,6 +178,9 @@ namespace Spark.Service
         /// </remarks>
         public ResourceEntry Read(string collection, string id)
         {
+            System.Diagnostics.Trace.WriteLine("-------------------");
+            System.Diagnostics.Trace.WriteLine("Read: " + collection + "/" + id);
+
             ResourceEntry entry = internalRead(collection, id);
             exporter.EnsureAbsoluteUris(entry);
             return entry;
@@ -196,6 +199,9 @@ namespace Spark.Service
         /// </remarks>
         public ResourceEntry VRead(string collection, string id, string version)
         {
+            System.Diagnostics.Trace.WriteLine("-------------------");
+            System.Diagnostics.Trace.WriteLine("Read: " + collection + "/" + id + " (version: " + version + ")");
+
             ResourceEntry entry = internalVRead(collection, id, version);
             exporter.EnsureAbsoluteUris(entry);
             return entry;
@@ -223,6 +229,9 @@ namespace Spark.Service
                  
             ResourceEntry result = internalCreate(newEntry);
             exporter.EnsureAbsoluteUris(result);
+
+            System.Diagnostics.Trace.WriteLine("-------------------");
+            System.Diagnostics.Trace.WriteLine("Created: " + result.SelfLink);
 
             return result;
         }
@@ -287,6 +296,8 @@ namespace Spark.Service
             _index.Process(newVersion);
 
             exporter.EnsureAbsoluteUris(newVersion);
+            System.Diagnostics.Trace.WriteLine("-------------------");
+            System.Diagnostics.Trace.WriteLine("Updated: " + newVersion.SelfLink);
             return (ResourceEntry)newVersion;
         }
 
@@ -303,6 +314,9 @@ namespace Spark.Service
         /// </remarks>
         public void Delete(string collection, string id)
         {
+            System.Diagnostics.Trace.WriteLine("-------------------");
+            System.Diagnostics.Trace.WriteLine("Delete: " + collection + "/" + id);
+
             RequestValidator.ValidateCollectionName(collection);
             RequestValidator.ValidateId(id);
 

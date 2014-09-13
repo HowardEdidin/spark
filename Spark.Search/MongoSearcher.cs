@@ -111,6 +111,7 @@ namespace Spark.Search
 
         private List<BsonValue> CollectKeys(string resourceType, IEnumerable<Criterium> criteria, SearchResults results)
         {
+
             //Mapping of original criterium and closed criterium, the former to be able to exclude it if it errors.
             var closedCriteria = new Dictionary<Criterium, Criterium>();
             foreach (var c in criteria)
@@ -118,10 +119,12 @@ namespace Spark.Search
                 if (c.Type == Operator.CHAIN)
                 {
                     closedCriteria.Add(c, CloseCriterium(c, resourceType));
+                    System.Diagnostics.Trace.WriteLine(String.Format("      CHAIN: {0}.{1} {2} {3} {4}", resourceType, c.ParamName, c.Modifier, c.Type.ToString(), c.Operand));
                 }
                 else
                 {
                     closedCriteria.Add(c, c);
+                    System.Diagnostics.Trace.WriteLine(String.Format("          {0}.{1} {2} {3} {4}", resourceType, c.ParamName, c.Modifier, c.Type.ToString(), c.Operand));
                 }
             }
 
@@ -134,12 +137,15 @@ namespace Spark.Search
                     try
                     {
                         criteriaQueries.Add(crit.Value.ToFilter(resourceType));
+                        var c = crit.Value;
                     }
                     catch (ArgumentException ex)
                     {
                         if (results == null) throw;
                         results.AddIssue(String.Format("Parameter [{0}] was ignored for the reason: {1}.", crit.Key.ToString(), ex.Message), OperationOutcome.IssueSeverity.Warning);
                         results.UsedCriteria.Remove(crit.Key);
+
+                        System.Diagnostics.Trace.WriteLine(String.Format("Parameter [{0}] was ignored for the reason: {1}.", crit.Key.ToString(), ex.Message));
                     }
                 }
                 if (criteriaQueries.Count > 0)
@@ -211,6 +217,7 @@ namespace Spark.Search
 
         public SearchResults Search(F.Query query)
         {
+            System.Diagnostics.Trace.WriteLine(String.Format("-------------------"));
             SearchResults results = new SearchResults();
 
             var criteria = parseCriteria(query, results);
