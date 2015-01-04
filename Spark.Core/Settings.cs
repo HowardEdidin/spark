@@ -42,13 +42,13 @@ namespace Spark.Config
             {
                 try
                 {
-                    int max = Convert.ToInt16(AppSettings.Get("MaxBinarySize"));
-                    if (max == 0) max = Int16.MaxValue;
+                    int max = Convert.ToInt32(AppSettings.Get("MaxBinarySize"));
+                    if (max == 0) max = Int32.MaxValue;
                     return max;
                 }
                 catch
                 {
-                    return Int16.MaxValue;
+                    return Int32.MaxValue;
                 }
             }
         }
