@@ -380,6 +380,67 @@ namespace Spark.Engine.Search
             return null;
         }
 
+        private List<Expression> ToExpressions(Ratio element)
+        {
+            try
+            {
+                return element != null ? ListOf(element.ToExpression()) : null;
+            }
+            catch (ArgumentException ex)
+            {
+                _log.InvalidElement("unknown", $"Ratio: {element.Numerator.Code} {element.Numerator.Unit} {element.Numerator.Value}/ {element.Denominator.Code} {element.Denominator.Unit} {element.Denominator.Value}", ex.Message);
+            }
+            return null;
+        }
+
+        private List<Expression> ToExpressions(Range element)
+        {
+            if (element == null || (element.Low == null && element.High == null))
+                return null;
+
+            var bounds = new List<IndexValue>();
+
+            bounds.Add(new IndexValue("low", element.Low.ToExpression()));
+            bounds.Add(new IndexValue("high", element.High.ToExpression()));
+
+            return ListOf(new CompositeValue(bounds));
+        }
+
+        private List<Expression> ToExpressions(SampledData element)
+        {
+            if (element == null)
+                return null;
+
+            // Need to review this Expression evaluation, as I'm pretty sure its wrong
+
+            return ListOf(new StringValue(element.Data));
+        }
+
+        private List<Expression> ToExpressions(Location.PositionComponent element)
+        {
+            try
+            {
+                return element != null ? ListOf(element.ToExpression()) : null;
+            }
+            catch (ArgumentException ex)
+            {
+                _log.InvalidElement("unknown", String.Format("Position: {0} {1}", element.Latitude, element.Longitude), ex.Message);
+            }
+            return null;
+        }
+        private List<Expression> ToExpressions(Timing element)
+        {
+            try
+            {
+                return element != null ? ListOf(element.ToExpression()) : null;
+            }
+            catch (ArgumentException ex)
+            {
+                _log.InvalidElement("unknown", String.Format("Timing: {0}", element.Code), ex.Message);
+            }
+            return null;
+        }
+
         private List<Expression> ToExpressions(Code element)
         {
             return element != null ? ListOf(new StringValue(element.Value)) : null;
